@@ -1,8 +1,8 @@
 # XAcademyChallenge
-XAcademy Challenge repository | Author: Wnorowsky Nicolás
+Author: Wnorowsky Nicolás
 
 
-### "OWNFIFA" PROJECT
+# "OWNFIFA" PROJECT
 
 Un reconocido player de e-sports nos solicita una web donde poder gestionar de forma sencilla los jugadores de su base de datos personal.
 Su interés radica particularmente en la posibilidad de visualizar el total de jugadors existentes, encontrar un jugador determinado de una forma sencilla e intuitiva, modificar sus atributos, eliminarlo y poder crear nuevos jugadores customizados e incluso conocer su skill progression a lo largo de los años.
@@ -11,7 +11,7 @@ Nos comunica además que quisiera contar con un login para limitar el acceso y l
 Por último, nos comenta que sería oportuno para él poder compartir la base de datos o importar nuevos datos a la misma.
 
 
-### PROPUESTA
+# PROPUESTA
 
 ## Objetivo del Sistema de Información
 
@@ -20,16 +20,15 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 
 ## Requerimientos del usuario
 
-# Requerimientos funcionales
+### Requerimientos funcionales
 
 // Actualizar incluye la modificación, consulta y eliminación
 // Para los fines de práctica este proyecto, se obviará la consulta, modificación y baja de usuarios planteando sólo la posiblidad del registro
 
-## Requerimientos Funcionales
 
 | **Requerimiento Global (RG)**      | **Requerimiento Detallado (RD)**                                                      |
 |:-----------------------------------|:--------------------------------------------------------------------------------------|
-| **Gestión de jugadores**            | Registrar jugador                                                                     |
+| **Gestión de jugadores*            | Registrar jugador                                                                     |
 |                                     | Actualizar jugador                                                                     |
 |                                     | Emitir lista de jugadores                                                             |
 |                                     | Generar estadística de progreso de jugador                                             |
@@ -44,7 +43,7 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 
 
 
-# Requerimientos no funcionales
+### Requerimientos no funcionales
 
 - El acceso a las funcionalidades de modificación debe estar restringido por roles de usuario
 - La autenticación de usuarios debe usar protocolos seguros como JWT (JSON Web Tokens)
@@ -52,9 +51,15 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 - La base de datos debe permitir importar datos desde formatos CSV
 - La interfaz debe ser intuitiva y fácil de usar para usuarios no técnicos
 
+### Roles de usuario
+
+// A fines de simplificarlo, ya que no es un requisito directo de esta tarea el rol del cliente será *Administrador*
+
+- Administrador: el cliente tendrá acceso total a las funcionalidades y vistas del sistema
+- Invitado: su acceso es restringido a interfaces de sólo lectura de datos, sin posibilidad de alterarlas
 
 
-
+## Épicas e Historias de Usuario (HU)
 
 
 
