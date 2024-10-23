@@ -25,27 +25,10 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 // Actualizar incluye la modificación, consulta y eliminación
 // Para los fines de práctica este proyecto, se obviará la consulta, modificación y baja de usuarios planteando sólo la posiblidad del registro
 
-Gestión de jugadores
-- Registrar jugador
-- Actualizar jugador
-- Emitir lista de jugadores
-- Generar estadística de progreso de jugador
-
-Gestión de seguridad
-- Iniciar sesión
-- Cerrar sesión
-- Limitar accesos
-- Registrar usuario
-
-Gestión de datos
-- Importar base de datos
-- Exportar base de datos
-- Compartir datos de jugadores
-
 ## Requerimientos Funcionales
 
 | **Requerimiento Global (RG)**      | **Requerimiento Detallado (RD)**                                                      |
-|-------------------------------------|---------------------------------------------------------------------------------------|
+|:-----------------------------------|:--------------------------------------------------------------------------------------|
 | **Gestión de jugadores**            | Registrar jugador                                                                     |
 |                                     | Actualizar jugador                                                                     |
 |                                     | Emitir lista de jugadores                                                             |
@@ -57,6 +40,7 @@ Gestión de datos
 | **Gestión de datos**                | Importar base de datos                                                                 |
 |                                     | Exportar base de datos                                                                 |
 |                                     | Compartir datos de jugadores                                                           |
+
 
 
 
