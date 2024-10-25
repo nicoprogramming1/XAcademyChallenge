@@ -1,12 +1,11 @@
-require('dotenv').config();
+require("dotenv").config({ path: './environments/environment.env' })
 
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const { headerMdw } = require("./middleware");
 
-const bodyParser = require("body-parser");
 const path = require("path");
-
 const app = express();
 
 // SETTINGS
@@ -15,6 +14,7 @@ app.set("port", process.env.PORT);
 app.set("case sensitive routing", true);
 
 // MIDDLEWARES
+app.use(headerMdw);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
@@ -30,5 +30,5 @@ app.use("/static", express.static(path.join(__dirname, "static")));
 
 // SERVER
 app.listen(app.get("port"), () => {
-    console.log(`Server ${app.get("appName")} on port: ${app.get("port")}`);
-  });
+  console.log(`Server ${app.get("appName")} on port: ${app.get("port")}`);
+});
