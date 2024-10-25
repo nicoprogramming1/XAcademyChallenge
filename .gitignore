@@ -1,4 +1,5 @@
 # Ignorar archivos de entorno
+/environments/
 .env
 
 # Ignorar carpetas de dependencias y build
