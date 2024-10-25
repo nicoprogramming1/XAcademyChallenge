@@ -40,7 +40,7 @@ app.listen(app.get("port"), async () => {
   try {
     // Primero trata de autenticarse y sincronizarse a la db
     await sequelize.authenticate();
-    console.log("Conexión a la base de datos establecida exitosamente.");
+    console.log("Conexión a la base de datos establecida exitosamente desde app.listen");
 
     // si necesitara que la estructura de la db cambie desde los modelos:
     // await sequelize.sync({ alter: true }); force: true elimina y recrea tablas
