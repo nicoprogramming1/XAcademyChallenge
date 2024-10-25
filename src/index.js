@@ -1,9 +1,10 @@
-require("dotenv").config({ path: './environments/environment.env' })
+require("dotenv").config({ path: "./environments/environment.env" });
 
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const { headerMdw } = require("./middleware");
+const { playerRouter } = require("./routes");
 
 const path = require("path");
 const app = express();
@@ -24,6 +25,10 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// ROUTES
+
+app.use("/player", playerRouter);
 
 // Server static files
 app.use("/static", express.static(path.join(__dirname, "static")));
