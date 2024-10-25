@@ -1,7 +1,8 @@
+require('dotenv').config();
+
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-require('dotenv').config(); // aun no se si va a aqui, debe estar donde conectamos con sequalize
 
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -10,7 +11,7 @@ const app = express();
 
 // SETTINGS
 app.set("appName", "ownFIFA");
-app.set("port", 3000);
+app.set("port", process.env.PORT);
 app.set("case sensitive routing", true);
 
 // MIDDLEWARES
@@ -28,6 +29,6 @@ app.use(
 app.use("/static", express.static(path.join(__dirname, "static")));
 
 // SERVER
-app.listen(3000, () => {
-  console.log(`Server ${app.get("appName")} on port: ${3000}`);
-});
+app.listen(app.get("port"), () => {
+    console.log(`Server ${app.get("appName")} on port: ${app.get("port")}`);
+  });
