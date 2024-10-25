@@ -6,7 +6,7 @@ const cors = require("cors");
 const path = require("path");
 const { headerMdw } = require("./middleware");
 const { playerRouter } = require("./routes");
-const sequelize = require("./database/database");
+const sequelize = require("./config/database");
 
 const app = express();
 
