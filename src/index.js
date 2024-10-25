@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+require('dotenv').config(); // aun no se si va a aqui, debe estar donde conectamos con sequalize
+
 const bodyParser = require("body-parser");
 const path = require("path");
 
