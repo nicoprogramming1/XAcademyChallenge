@@ -1,7 +1,6 @@
 # Ignorar archivos de entorno
 /environments/
 .env
-../front-end/
 
 # Ignorar carpetas de dependencias y build
 node_modules/
