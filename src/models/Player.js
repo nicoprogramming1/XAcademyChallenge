@@ -50,6 +50,22 @@ Player.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    fifa_version: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    fifa_update: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    player_face_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    potential: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     sequelize,
