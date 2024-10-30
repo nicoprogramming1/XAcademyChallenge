@@ -1,3 +1,81 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-</form>
+<div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="longName">Nombre y apellido:</label>
+            <input type="text" name="longName" id="longName" formControlName="longName" />
+        </div>
+        <div>
+            <label for="age">Edad:</label>
+            <input type="text" name="age" id="age" formControlName="age" />
+        </div>
+        <div formArrayName="playerPositions">
+            <h5>Posiciones: </h5>
+            @for(position of playerPositions; track position) {
+            <input type="checkbox" [value]="position" (change)="onCheckboxChange($event)" />
+            {{ position }}
+            }
+        </div>
+        <div>
+            <label for="clubName">Club:</label>
+            <input type="text" name="clubName" id="clubName" formControlName="clubName" />
+        </div>
+        <div>
+            <label for="nationalityName">Nacionalidad:</label>
+            <input type="text" name="nationalityName" id="nationalityName" formControlName="nationalityName" />
+        </div>
+        <div>
+            <label for="preferredFoot">Pie Preferido:</label>
+            <select name="preferredFoot" id="preferredFoot" formControlName="preferredFoot">
+                @for(foot of preferredFoot; track foot) {
+                <option [value]="foot">{{foot}}</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="bodyType">Tipo de cuerpo:</label>
+            <select name="bodyType" id="bodyType" formControlName="bodyType">
+                @for(bodyType of bodyType; track bodyType) {
+                <option [value]="bodyType">{{bodyType}}</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="heightCm">Altura (cm):</label>
+            <input type="number" name="heightCm" id="heightCm" formControlName="heightCm" />
+        </div>
+        <div>
+            <label for="weightKg">Peso (kg):</label>
+            <input type="number" name="weightKg" id="weightKg" formControlName="weightKg" />
+        </div>
+        <div>
+            <label for="potential">Potencial:</label>
+            <input type="number" name="potential" id="potential" formControlName="potential" />
+        </div>
+        <div>
+            <label for="overall">Nivel de skill general:</label>
+            <input type="number" name="overall" id="overall" formControlName="overall" />
+        </div>
+        <div>
+            <label for="fifaUpdate">FIFA Update:</label>
+            <select name="fifaUpdate" id="fifaUpdate" formControlName="fifaUpdate">
+                @for(fifaUpdate of fifaUpdate; track fifaUpdate) {
+                <option [value]="fifaUpdate">{{fifaUpdate}}</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="fifaVersion">FIFA Version:</label>
+            <select name="fifaVersion" id="fifaVersion" formControlName="fifaVersion">
+                @for(fifaVersion of fifaVersion; track fifaVersion) {
+                <option [value]="fifaVersion">{{fifaVersion}}</option>
+                }
+            </select>
+        </div>
+        <button type="submit">
+            Registrar jugador
+        </button>
+        <button type="reset">
+            Reestablecer
+        </button>
+    </form>
+</div>

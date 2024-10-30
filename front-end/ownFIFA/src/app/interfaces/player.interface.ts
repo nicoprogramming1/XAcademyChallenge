@@ -46,3 +46,22 @@ export enum BodyType {
   LEAN170PLUS = 'Lean (170-185)',
   LEAN185PLUS = 'Lean (185+)',
 }
+
+export enum FifaVersion {
+  TWENTYTWO = "22",
+  TWENTYTHREE = "23",
+  TWENTYFOUR = "24",
+}
+
+export enum FifaUpdate {
+  TEN = "10",
+  NINE = "9",
+  EIGHT = "8",
+  SEVEN = "7",
+  SIX = "6",
+  FIVE = "5",
+  FOUR = "4",
+  THREE = "3",
+  TWO = "2",
+  ONE = "1"
+}

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'create_player',
+    path: 'player-registration',
     loadComponent: () =>
       import(
         './views/players/player-registration/player-registration.component'
