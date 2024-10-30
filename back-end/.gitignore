@@ -4,3 +4,6 @@
 
 # Ignorar carpetas de dependencias y build
 node_modules/
+
+# Ignorar workspace
+develops.code-workspace
