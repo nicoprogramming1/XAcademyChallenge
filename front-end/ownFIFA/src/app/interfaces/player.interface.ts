@@ -17,6 +17,13 @@ export interface Player {
   skills?: string;
 }
 
+export interface PlayerState {
+  loading: boolean,
+  error: string | null,
+  player: Player | null,
+  players: Player[]
+}
+
 export enum PlayerPositions {
   ST = 'ST',
   RW = 'RW',
@@ -64,4 +71,9 @@ export enum FifaUpdate {
   THREE = "3",
   TWO = "2",
   ONE = "1"
+}
+
+export enum playerFaceUrl {
+  ROSTROA = "https://cdn.sofifa.net/players/227/204/23_120.png",
+  ROSTROB = "https://cdn.sofifa.net/players/227/354/23_120.png"
 }

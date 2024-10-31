@@ -16,6 +16,14 @@
             }
         </div>
         <div>
+            <label for="playerFaceUrl">Rostro:</label>
+            <select name="playerFaceUrl" id="playerFaceUrl" formControlName="playerFaceUrl">
+                @for(face of playerFaceUrl; track face) {
+                <option [value]="face">{{face}}</option>
+                }
+            </select>
+        </div>
+        <div>
             <label for="clubName">Club:</label>
             <input type="text" name="clubName" id="clubName" formControlName="clubName" />
         </div>

@@ -8,7 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BodyType, FifaUpdate, FifaVersion, PlayerPositions, PreferredFoot } from '../../../interfaces/player.interface';
+import { BodyType, FifaUpdate, FifaVersion, Player, playerFaceUrl, PlayerPositions, PreferredFoot } from '../../../interfaces/player.interface';
+import { PlayerService } from '../../../services/player.service';
 
 @Component({
   selector: 'app-player-registration',
@@ -18,13 +19,15 @@ import { BodyType, FifaUpdate, FifaVersion, PlayerPositions, PreferredFoot } fro
   styleUrl: './player-registration.component.scss',
 })
 export class PlayerRegistrationComponent {
-  public registerForm!: FormGroup;
   private fb = inject(FormBuilder);
+  private playerService = inject(PlayerService)
+  public registerForm!: FormGroup;
   public playerPositions = Object.values(PlayerPositions);
   public preferredFoot = Object.values(PreferredFoot);
   public bodyType = Object.values(BodyType);
   public fifaUpdate = Object.values(FifaUpdate)
   public fifaVersion = Object.values(FifaVersion)
+  public playerFaceUrl = Object.values(playerFaceUrl)
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -59,5 +62,28 @@ export class PlayerRegistrationComponent {
     }
   }
 
-  onSubmit() {}
+  onSubmit() {
+    if(this.registerForm.valid) {   // creamos un jugador según interfaz Player
+      const player: Player = {
+        longName: this.registerForm.get("longName")?.value,
+        age: this.registerForm.get("age")?.value,
+        playerPositions: this.registerForm.get("playerPositions")?.value,
+        playerFaceUrl: this.registerForm.get("playerFaceUrl")?.value,
+        clubName: this.registerForm.get("clubName")?.value,
+        nationalityName: this.registerForm.get("nationalityName")?.value,
+        preferredFoot: this.registerForm.get("preferredFoot")?.value,
+        bodyType: this.registerForm.get("bodyType")?.value,
+        heightCm: this.registerForm.get("heightCm")?.value,
+        weightKg: this.registerForm.get("weightKg")?.value,
+        potential: this.registerForm.get("potential")?.value,
+        overall: this.registerForm.get("overall")?.value,
+        fifaVersion: this.registerForm.get("fifaVersion")?.value,
+        fifaUpdate: this.registerForm.get("fifaUpdate")?.value,
+      }
+
+      this.playerService.savePlayer(player).suscribe()
+
+    }
+
+  }
 }
