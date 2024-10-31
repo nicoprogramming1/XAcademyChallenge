@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PlayerStateService } from './player-statet.service';
+import { PlayerStateService } from './player-state.service';
 
 describe('PlayerStateManagementService', () => {
   let service: PlayerStateService;

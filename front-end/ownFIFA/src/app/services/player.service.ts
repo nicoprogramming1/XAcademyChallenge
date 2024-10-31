@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { PlayerStateService } from './player-statet.service';
+import { PlayerStateService } from './player-state.service';
 import { Player } from '../interfaces/player.interface';
 import { catchError, map, Observable, of } from 'rxjs';
 import { PlayerResponse } from '../interfaces/responses.interface';
@@ -35,6 +35,7 @@ export class PlayerService {
 
   private handleError(err: string) {
     this.playerStateService.errorState(err);
+    console.log("Se ha producido un error: ", err)
   }
 
 }
