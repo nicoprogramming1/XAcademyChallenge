@@ -10,61 +10,75 @@ Player.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    long_name: {
+    longName: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'long_name'
     },
     overall: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'overall'
     },
     age: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'age'
     },
-    player_positions: {
+    playerPositions: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'player_positions'
     },
-    body_type: {
+    bodyType: {
       type: DataTypes.STRING,
       allowNull: true,
+      field: 'body_type'
     },
-    club_name: {
+    clubName: {
       type: DataTypes.STRING,
       allowNull: true,
+      field: 'club_name'
     },
-    height_cm: {
+    heightCm: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      field: 'height_cm'
     },
-    nationality_name: {
+    nationalityName: {
       type: DataTypes.STRING,
       allowNull: true,
+      field: 'nationality_name'
     },
-    preferred_foot: {
+    preferredFoot: {
       type: DataTypes.STRING,
       allowNull: true,
+      field: 'preferred_foot'
     },
-    weight_kg: {
+    weightKg: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      field: 'weight_kg'
     },
-    fifa_version: {
+    fifaVersion: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      field: 'fifa_version'
     },
-    fifa_update: {
+    fifaUpdate: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      field: 'fifa_update'
     },
-    player_face_url: {
+    playerFaceUrl: {
       type: DataTypes.STRING,
       allowNull: true,
+      field: 'player_face_url'
     },
     potential: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      field: 'potential'
     },
   },
   {

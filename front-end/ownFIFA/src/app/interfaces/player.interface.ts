@@ -2,14 +2,14 @@ export interface Player {
   id?: number;
   longName: string;
   age: number;
-  playerPositions: PlayerPositions[];
+  playerPositions: string;
   playerFaceUrl: string;
-  clubName: string;
-  nationalityName: string;
-  preferredFoot: PreferredFoot;
-  bodyType: BodyType;
-  heightCm: number;
-  weightKg: number;
+  clubName?: string;
+  nationalityName?: string;
+  preferredFoot?: PreferredFoot;
+  bodyType?: BodyType;
+  heightCm?: number;
+  weightKg?: number;
   potential: number;
   overall: number;
   fifaVersion: number;
@@ -17,11 +17,13 @@ export interface Player {
   skills?: string;
 }
 
+
 export interface PlayerState {
   loading: boolean,
   error: string | null,
   player: Player | null,
-  players: Player[]
+  players: Player[],
+  successMessage: string | null
 }
 
 export enum PlayerPositions {

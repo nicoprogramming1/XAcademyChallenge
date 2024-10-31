@@ -20,6 +20,7 @@ export class PlayerService {
       map(res => {
         if(res.success){
           this.playerStateService.savePlayerState(res.data)
+          console.log("Se ha creado con éxito el/la jugador/a ", res.data.longName)
           return res.data
         }
         else {
@@ -35,7 +36,7 @@ export class PlayerService {
 
   private handleError(err: string) {
     this.playerStateService.errorState(err);
-    console.log("Se ha producido un error: ", err)
+    console.log("Se ha producido un error (desde el handleError): ", err)
   }
 
 }

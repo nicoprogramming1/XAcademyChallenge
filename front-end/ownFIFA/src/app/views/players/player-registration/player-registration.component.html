@@ -1,25 +1,26 @@
 <div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div><span>Los campos marcados con (*) son obligatorios</span></div>
         <div>
-            <label for="longName">Nombre y apellido:</label>
+            <label for="longName">Nombre y apellido: *</label>
             <input type="text" name="longName" id="longName" formControlName="longName" />
         </div>
         <div>
-            <label for="age">Edad:</label>
+            <label for="age">Edad: *</label>
             <input type="text" name="age" id="age" formControlName="age" />
         </div>
         <div formArrayName="playerPositions">
-            <h5>Posiciones: </h5>
+            <h5>Posiciones: *</h5>
             @for(position of playerPositions; track position) {
             <input type="checkbox" [value]="position" (change)="onCheckboxChange($event)" />
             {{ position }}
             }
         </div>
         <div>
-            <label for="playerFaceUrl">Rostro:</label>
+            <label for="playerFaceUrl">Rostro: *</label>
             <select name="playerFaceUrl" id="playerFaceUrl" formControlName="playerFaceUrl">
                 @for(face of playerFaceUrl; track face) {
-                <option [value]="face">{{face}}</option>
+                <option [value]="face">{{ face }}</option>
                 }
             </select>
         </div>
@@ -35,7 +36,7 @@
             <label for="preferredFoot">Pie Preferido:</label>
             <select name="preferredFoot" id="preferredFoot" formControlName="preferredFoot">
                 @for(foot of preferredFoot; track foot) {
-                <option [value]="foot">{{foot}}</option>
+                <option [value]="foot">{{ foot }}</option>
                 }
             </select>
         </div>
@@ -43,7 +44,7 @@
             <label for="bodyType">Tipo de cuerpo:</label>
             <select name="bodyType" id="bodyType" formControlName="bodyType">
                 @for(bodyType of bodyType; track bodyType) {
-                <option [value]="bodyType">{{bodyType}}</option>
+                <option [value]="bodyType">{{ bodyType }}</option>
                 }
             </select>
         </div>
@@ -56,34 +57,41 @@
             <input type="number" name="weightKg" id="weightKg" formControlName="weightKg" />
         </div>
         <div>
-            <label for="potential">Potencial:</label>
+            <label for="potential">Potencial: *</label>
             <input type="number" name="potential" id="potential" formControlName="potential" />
         </div>
         <div>
-            <label for="overall">Nivel de skill general:</label>
+            <label for="overall">Nivel de skill general: *</label>
             <input type="number" name="overall" id="overall" formControlName="overall" />
         </div>
         <div>
-            <label for="fifaUpdate">FIFA Update:</label>
+            <label for="fifaUpdate">FIFA Update: *</label>
             <select name="fifaUpdate" id="fifaUpdate" formControlName="fifaUpdate">
                 @for(fifaUpdate of fifaUpdate; track fifaUpdate) {
-                <option [value]="fifaUpdate">{{fifaUpdate}}</option>
+                <option [value]="fifaUpdate">{{ fifaUpdate }}</option>
                 }
             </select>
         </div>
         <div>
-            <label for="fifaVersion">FIFA Version:</label>
+            <label for="fifaVersion">FIFA Version: *</label>
             <select name="fifaVersion" id="fifaVersion" formControlName="fifaVersion">
                 @for(fifaVersion of fifaVersion; track fifaVersion) {
-                <option [value]="fifaVersion">{{fifaVersion}}</option>
+                <option [value]="fifaVersion">{{ fifaVersion }}</option>
                 }
             </select>
         </div>
-        <button type="submit">
-            Registrar jugador
-        </button>
-        <button type="reset">
-            Reestablecer
-        </button>
+        <button type="submit">Registrar jugador</button>
+        <button type="button" (click)="resetForm()">Reestablecer</button>
+
+        <div>
+            @if(successMessage()) {
+                {{ successMessage() }}
+            }
+        </div>
+        <div>
+            @if(invalidForm) {
+                <span>Hay campos obligatorios que deben ser completados!</span>
+            }
+        </div>
     </form>
 </div>

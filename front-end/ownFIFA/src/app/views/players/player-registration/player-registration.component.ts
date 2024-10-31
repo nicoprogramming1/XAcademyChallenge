@@ -8,8 +8,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BodyType, FifaUpdate, FifaVersion, Player, playerFaceUrl, PlayerPositions, PreferredFoot } from '../../../interfaces/player.interface';
+import {
+  BodyType,
+  FifaUpdate,
+  FifaVersion,
+  Player,
+  playerFaceUrl,
+  PlayerPositions,
+  PreferredFoot,
+} from '../../../interfaces/player.interface';
 import { PlayerService } from '../../../services/player.service';
+import { PlayerStateService } from '../../../services/player-state.service';
 
 @Component({
   selector: 'app-player-registration',
@@ -20,27 +29,35 @@ import { PlayerService } from '../../../services/player.service';
 })
 export class PlayerRegistrationComponent {
   private fb = inject(FormBuilder);
-  private playerService = inject(PlayerService)
+  private playerService = inject(PlayerService);
+  private playerStateService = inject(PlayerStateService);
+
+  public loading = this.playerStateService.loading;
+  public error = this.playerStateService.error;
+  public successMessage = this.playerStateService.successMessage;
+
+  public invalidForm: boolean = false;
+
   public registerForm!: FormGroup;
   public playerPositions = Object.values(PlayerPositions);
   public preferredFoot = Object.values(PreferredFoot);
   public bodyType = Object.values(BodyType);
-  public fifaUpdate = Object.values(FifaUpdate)
-  public fifaVersion = Object.values(FifaVersion)
-  public playerFaceUrl = Object.values(playerFaceUrl)
+  public fifaUpdate = Object.values(FifaUpdate);
+  public fifaVersion = Object.values(FifaVersion);
+  public playerFaceUrl = Object.values(playerFaceUrl);
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       longName: new FormControl('', Validators.required),
-      age: new FormControl('', [Validators.required]),
-      playerPositions: this.fb.array([]),
+      age: new FormControl('', [Validators.required, Validators.min(1)]),
+      playerPositions: this.fb.array([], Validators.required),
       playerFaceUrl: new FormControl('', Validators.required),
-      clubName: new FormControl('', Validators.required),
-      nationalityName: new FormControl('', Validators.required),
-      preferredFoot: new FormControl('', Validators.required),
-      bodyType: new FormControl('', Validators.required),
-      heightCm: new FormControl('', Validators.required),
-      weightKg: new FormControl('', Validators.required),
+      clubName: new FormControl(''),
+      nationalityName: new FormControl(''),
+      preferredFoot: new FormControl(''),
+      bodyType: new FormControl(''),
+      heightCm: new FormControl(''),
+      weightKg: new FormControl(''),
       potential: new FormControl('', Validators.required),
       overall: new FormControl('', Validators.required),
       fifaVersion: new FormControl('', Validators.required),
@@ -48,42 +65,65 @@ export class PlayerRegistrationComponent {
     });
   }
 
-  onCheckboxChange(event: any) {
+  onCheckboxChange(event: Event) {
+    const input = event.target as HTMLInputElement; // tipo de evento
     const selectedPlayerPositions = this.registerForm.get(
       'playerPositions'
     ) as FormArray;
-    if (event.target.checked) {
-      selectedPlayerPositions.push(this.fb.control(event.target.value));
+
+    if (input.checked) {
+      selectedPlayerPositions.push(this.fb.control(input.value));
     } else {
       const index = selectedPlayerPositions.controls.findIndex(
-        (x) => x.value === event.target.value
+        (x) => x.value === input.value
       );
       selectedPlayerPositions.removeAt(index);
     }
   }
 
   onSubmit() {
-    if(this.registerForm.valid) {   // creamos un jugador según interfaz Player
+    if (this.registerForm.valid) {
+      const formValues = this.registerForm.value;
+
       const player: Player = {
-        longName: this.registerForm.get("longName")?.value,
-        age: this.registerForm.get("age")?.value,
-        playerPositions: this.registerForm.get("playerPositions")?.value,
-        playerFaceUrl: this.registerForm.get("playerFaceUrl")?.value,
-        clubName: this.registerForm.get("clubName")?.value,
-        nationalityName: this.registerForm.get("nationalityName")?.value,
-        preferredFoot: this.registerForm.get("preferredFoot")?.value,
-        bodyType: this.registerForm.get("bodyType")?.value,
-        heightCm: this.registerForm.get("heightCm")?.value,
-        weightKg: this.registerForm.get("weightKg")?.value,
-        potential: this.registerForm.get("potential")?.value,
-        overall: this.registerForm.get("overall")?.value,
-        fifaVersion: this.registerForm.get("fifaVersion")?.value,
-        fifaUpdate: this.registerForm.get("fifaUpdate")?.value,
-      }
+        longName: formValues.longName,
+        age: formValues.age,
+        playerPositions: formValues.playerPositions.join(','),
+        playerFaceUrl: formValues.playerFaceUrl || null,
+        clubName: formValues.clubName || null,
+        nationalityName: formValues.nationalityName || null,
+        preferredFoot: formValues.preferredFoot || null,
+        bodyType: formValues.bodyType || null,
+        heightCm: formValues.heightCm || null,
+        weightKg: formValues.weightKg || null,
+        potential: formValues.potential || null,
+        overall: formValues.overall,
+        fifaVersion: formValues.fifaVersion,
+        fifaUpdate: formValues.fifaUpdate,
+      };
 
-      this.playerService.savePlayer(player).suscribe()
-
+      this.playerService.savePlayer(player).subscribe({
+        next: (res) => {
+          console.log('Se ha registrado con éxito al jugador: ', res?.longName);
+          this.invalidForm = false;
+        },
+        error: (err) => {
+          console.log('Ha habido un error en el registro', err);
+          this.invalidForm = true;
+        },
+        complete: () => {
+          this.resetForm();
+        },
+      });
+    } else {
+      this.invalidForm = true;
+      console.log('El formulario no está validado');
     }
+  }
 
+  resetForm(): void {
+    this.registerForm.reset();
+    (this.registerForm.get('playerPositions') as FormArray).clear(); // Limpia el array
+    this.invalidForm = false;
   }
 }
