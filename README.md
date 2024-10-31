@@ -64,7 +64,7 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 | Título                              | ID        | Actor        | Prioridad | Descripción                                                                                                              | Criterios de Aceptación |
 |-------------------------------------|-----------|--------------|-----------|--------------------------------------------------------------------------------------------------------------------------|-------------------------|
 | Gestión de jugadores                | EP001     | Administrador | Alta      | Como administrador del sistema, quiero poder gestionar la información de los jugadores para mantener un registro actualizado. |                         |
-| Registrar jugador                   | HU001     | Administrador | Alta      | Como administrador, quiero poder registrar nuevos jugadores en el sistema, ingresando su información personal y datos relevantes para que puedan ser gestionados. | El jugador se debe registrar con éxito y reflejar en la base de datos. |
+| Registrar jugador                   | HU001     | Administrador | Alta      | Como administrador, quiero poder registrar nuevos jugadores en el sistema, ingresando su información personal y datos relevantes para que puedan ser gestionados. | Los siguientes campos deben ser obligatorios: nombre, edad, overall, posición, rostro, version, update y potencial. Se deben mostrar mensajes de error de validación y de registro exitoso. |
 | Modificar jugador                   | HU002     | Administrador | Media      | Como administrador, quiero poder modificar la información de un jugador existente para corregir o actualizar sus datos.    | Los cambios deben reflejarse de inmediato en la base de datos. |
 | Eliminar jugador                    | HU003     | Administrador | Baja      | Como administrador, quiero poder eliminar un jugador del sistema para depurar la base de datos cuando sea necesario.       | El jugador debe eliminarse correctamente y su información no debe estar disponible en futuras consultas. |
 | Consultar jugador                   | HU004     | Usuario      | Alta     | Como usuario, quiero poder consultar los detalles de un jugador para ver su perfil y estadísticas relacionadas.            | La consulta debe mostrar la información detallada del jugador solicitado. |
@@ -79,12 +79,6 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 | Importar base de datos externa      | HU011     | Administrador | Media      | Como administrador, quiero poder importar una base de datos externa para cargar información masiva al sistema.             | Los datos deben ser importados correctamente y reflejados en el sistema sin errores. |
 | Exportar base de datos              | HU012     | Administrador | Baja      | Como administrador, quiero poder exportar la base de datos del sistema para realizar respaldos o compartirla externamente. | La base de datos debe exportarse en el formato adecuado y sin pérdida de información. |
 | Compartir datos de jugadores (CSV)  | HU013     | Administrador | Media     | Como administrador, quiero poder exportar la información de los jugadores en formato CSV para poder compartirla fácilmente. | El archivo CSV debe generarse con los datos correctos y descargarse sin errores. |
-
-
-
-
-
-
 
 
 
