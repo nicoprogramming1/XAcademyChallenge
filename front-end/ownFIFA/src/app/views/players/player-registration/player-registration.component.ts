@@ -103,7 +103,7 @@ export class PlayerRegistrationComponent {
       const player: Player = {
         longName: formValues.longName,
         age: formValues.age,
-        playerPositions: formValues.playerPositions.join(','),
+        playerPositions: formValues.playerPositions.join(','),  // convierte strings a array
         playerFaceUrl: formValues.playerFaceUrl || null,
         clubName: formValues.clubName || null,
         nationalityName: formValues.nationalityName || null,
