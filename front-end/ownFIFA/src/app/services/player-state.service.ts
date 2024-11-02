@@ -23,6 +23,13 @@ export class PlayerStateService {
     this.#state.update((state) => ({ ...state, loading: true, error: null }));
   }
 
+  public stopLoadingState() {
+    this.#state.update(state => ({
+      ...state,
+      loading: false
+    }))
+  }
+
   public errorState(message: string) {
     this.#state.update((state) => ({
       ...state,
@@ -59,5 +66,14 @@ export class PlayerStateService {
       player,
       successMessage: 'El jugador ha sido registrado con éxito!',
     }));
+  }
+
+  public deletePlayerState(id: number) {
+    this.#state.update(state => ({
+      ...state,
+      loading: false,
+      error: null,
+      successMessage: "El jugador ha sido eliminado con éxito!"
+    }))
   }
 }

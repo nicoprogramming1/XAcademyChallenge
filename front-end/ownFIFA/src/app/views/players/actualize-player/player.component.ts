@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-player',
@@ -15,6 +15,7 @@ export class PlayerComponent {
   private playerService = inject(PlayerService);
   private playerStateService = inject(PlayerStateService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router)
 
   public loading = this.playerStateService.loading;
   public error = this.playerStateService.error;
@@ -50,11 +51,27 @@ export class PlayerComponent {
       '¿Está seguro de que desea eliminar el/la jugador/a?'
     );
     if (confirmed) {
-      this.deletePlayer();
+      if(this.id !== null) {
+        this.deletePlayer(this.id);
+      }
+      else {
+        console.error("El id del jugador a eliminar es nulo")
+      }
     }
   }
 
-  deletePlayer(): void {}
+  deletePlayer(id: number): void {
+    this.playerService.deletePlayer(id).subscribe({
+      next: res => {
+        console.log("Jugador eliminado con éxito")
+        this.router.navigate(["/players"])
+      },
+      error: err => {
+        alert("Se ha producido un error en la eliminación del jugador!")
+        console.error("Ha ocurrido un error al eliminar el jugador")
+      }
+    })
+  }
 
   toggleEdit(): void {
     !this.editMode;

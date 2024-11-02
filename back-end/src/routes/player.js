@@ -6,9 +6,9 @@ const { playerController } = require("../controllers");
 router.get("/", playerController.getAllPlayers);
 router.post("/", playerController.createPlayer);
 router.get("/:id", playerController.getPlayerById);
-
+router.delete("/:id", playerController.deletePlayer);
 /* 
 router.put("/:id", playerController.updatePlayer);
-router.delete("/:id", playerController.deletePlayer); */
-
+*/
 module.exports = router;
+
