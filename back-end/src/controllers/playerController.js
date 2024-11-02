@@ -21,6 +21,25 @@ exports.getAllPlayers = async (req, res) => {
     }
 };
 
+exports.getPlayerById = async (req, res) => {
+    const id = req.data
+    console.log("El id en el controller es: ", id)
+    try {
+        const result = await playerService.getPlayerById(id)
+        res.status(200).json({
+            success: true,
+            message: "Jugador recuperado con éxito",
+            data: result
+        })
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: "Jugador no encontrado",
+            data: null
+        })
+    }
+}
+
 exports.createPlayer = async (req, res) => {
     try {
         const playerData = req.body;
