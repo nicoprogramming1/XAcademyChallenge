@@ -19,25 +19,13 @@ import {
 } from '../../../interfaces/player.interface';
 import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-player-registration',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDividerModule,
+    ReactiveFormsModule
   ],
   templateUrl: './player-registration.component.html',
   styleUrl: './player-registration.component.scss',

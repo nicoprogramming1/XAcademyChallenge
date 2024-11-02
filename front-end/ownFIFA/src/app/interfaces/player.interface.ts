@@ -4,8 +4,8 @@ export interface Player {
   age: number;
   playerPositions: string;
   playerFaceUrl: string;
-  clubName?: string;
-  nationalityName?: string;
+  clubName?: string | undefined;
+  nationalityName?: string | undefined;
   preferredFoot?: PreferredFoot;
   bodyType?: BodyType;
   heightCm?: number;

@@ -17,7 +17,7 @@ export class PlayerStateService {
   public players = computed(() => this.#state().players);
   public loading = computed(() => this.#state().loading);
   public error = computed(() => this.#state().error);
-  public successMessage = computed(() => this.#state().successMessage)
+  public successMessage = computed(() => this.#state().successMessage);
 
   public loadingState() {
     this.#state.update((state) => ({ ...state, loading: true, error: null }));
@@ -27,7 +27,17 @@ export class PlayerStateService {
     this.#state.update((state) => ({
       ...state,
       loading: false,
-      error: message || 'An unknown error ocurred',
+      error: message || 'Ha ocurrido un error',
+    }));
+  }
+
+  public loadPlayersState(players: Player[]) {
+    this.#state.update((state) => ({
+      ...state,
+      loading: false,
+      error: null,
+      players: players,
+      successMessage: 'Jugadores cargados con éxito!',
     }));
   }
 
@@ -37,7 +47,7 @@ export class PlayerStateService {
       loading: false,
       error: null,
       player: player,
-      successMessage: "El jugador ha sido registrado con éxito!"
+      successMessage: 'El jugador ha sido registrado con éxito!',
     }));
   }
 }
