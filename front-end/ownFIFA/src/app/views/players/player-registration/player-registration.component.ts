@@ -111,7 +111,7 @@ export class PlayerRegistrationComponent {
           this.invalidForm = false;
         },
         error: (err) => {
-          console.log('Ha habido un error en el registro', err);
+          console.error('Ha habido un error en el registro', err);
           this.invalidForm = true;
         },
         complete: () => {

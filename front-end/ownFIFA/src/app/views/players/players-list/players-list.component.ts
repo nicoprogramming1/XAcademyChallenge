@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
 import { CardPlayerComponent } from '../../../shared/card-player/card-player.component';
@@ -10,7 +9,6 @@ import { CardPlayerComponent } from '../../../shared/card-player/card-player.com
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     CardPlayerComponent
   ],
   templateUrl: './players-list.component.html',
@@ -36,14 +34,14 @@ export class PlayersListComponent {
   loadPlayers(page: number) {
     // actualiza el state lista de jugadores para la page actual
     console.log("loadPlayers page: ", page)
-    this.playerService.fetchPlayers(page).subscribe({
+    this.playerService.getAllPlayers(page).subscribe({
       next: (res) => {
         this.page = page
         console.log(`Se devuelven con éxito ${res?.data.players.length} jugadores para la página ${page}`);
         console.log("Desde loadPlayers, lista de jugadores: ", res?.data.players)
       },
       error: (err) => {
-        console.log('Error al cargar jugadores: ', err.message);
+        console.error('Error al cargar jugadores: ', err.message);
       },
     });
   }

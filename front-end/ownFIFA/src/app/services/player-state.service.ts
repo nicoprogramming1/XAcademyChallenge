@@ -31,12 +31,22 @@ export class PlayerStateService {
     }));
   }
 
-  public loadPlayersState(players: Player[]) {
+  public loadPlayerState(player: Player) {
+    this.#state.update(state => ({
+      ...state,
+      loading: false,
+      error: null,
+      player,
+      successMessage: "Jugador cargado con éxito"
+    }))
+  }
+
+  public loadAllPlayersState(players: Player[]) {
     this.#state.update((state) => ({
       ...state,
       loading: false,
       error: null,
-      players: players,
+      players,
       successMessage: 'Jugadores cargados con éxito!',
     }));
   }
@@ -46,7 +56,7 @@ export class PlayerStateService {
       ...state,
       loading: false,
       error: null,
-      player: player,
+      player,
       successMessage: 'El jugador ha sido registrado con éxito!',
     }));
   }
