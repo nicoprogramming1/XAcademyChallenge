@@ -17,14 +17,37 @@ export class PlayerService {
   private apiUrl = environment.apiUrl;
   private playerStateService = inject(PlayerStateService);
 
-  fetchPlayers(page: number): Observable<PlayersResponse | null> {
+  getAllPlayers(page: number): Observable<PlayersResponse | null> {
     this.playerStateService.loadingState();
-    return this.http.get<PlayersResponse>(`${this.apiUrl}/player?page=${page}`).pipe(
+    return this.http
+      .get<PlayersResponse>(`${this.apiUrl}/player?page=${page}`)
+      .pipe(
+        map((res) => {
+          if (res.success) {
+            this.playerStateService.loadAllPlayersState(res.data.players);
+            console.log(
+              'Desde el service, lista de jugadores: ',
+              res.data.players
+            );
+            return res;
+          } else {
+            throw new Error(res.message);
+          }
+        }),
+        catchError((err) => {
+          this.handleError(err.message);
+          return of(null);
+        })
+      );
+  }
+
+  getPlayerById(id: number): Observable<Player | null> {
+    this.playerStateService.loadingState();
+    return this.http.get<PlayerResponse>(`${this.apiUrl}/player/:${id}`).pipe(
       map((res) => {
         if (res.success) {
-          this.playerStateService.loadPlayersState(res.data.players);
-          console.log("Desde el service, lista de jugadores: ", res.data.players)
-          return res;
+          this.playerStateService.loadPlayerState(res.data);
+          return res.data;
         } else {
           throw new Error(res.message);
         }
@@ -60,6 +83,6 @@ export class PlayerService {
 
   private handleError(err: string) {
     this.playerStateService.errorState(err);
-    console.log('Se ha producido un error (desde el handleError): ', err);
+    console.error('Se ha producido un error (desde el handleError): ', err);
   }
 }
