@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-player',
@@ -14,6 +15,21 @@ export class CardPlayerComponent {
   @Input() age!: number
   @Input() nationalityName: string | undefined = "Desconocida"
   @Input() overall!: number
-  @Input() clubName: string | undefined  = "Desconocido"
-  @Input() id!: number | undefined 
+  @Input() clubName: string | undefined
+  @Input() id?: number
+
+  private router = inject(Router)
+
+  ngOnInit(): void {
+    if(!this.clubName) {
+      this.clubName = "Libre"
+    }
+  }
+
+  navigateToPlayer(id?: number) {
+    if (id !== undefined) {
+      this.router.navigate(['/player', id]);
+    }
+  }
+
 }

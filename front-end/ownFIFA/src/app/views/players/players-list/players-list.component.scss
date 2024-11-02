@@ -1,0 +1,16 @@
+.content {
+    width: fit-content;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    width: 25%;
+    border: 0;
+}
+
+.nav {
+    margin-top: 25px;
+}

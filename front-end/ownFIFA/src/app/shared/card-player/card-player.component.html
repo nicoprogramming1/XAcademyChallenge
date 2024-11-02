@@ -1,15 +1,20 @@
-<div class="card-player">
-    <img src="{{playerFaceUrl}}" class="card-img-top" alt="Imagen de {{longName}}">
-    <div class="card-body">
-      <h5 class="card-title">{{longName}}</h5>
-      <p class="card-text">Nationality: {{nationalityName}}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Age: {{age}}</li>
-      <li class="list-group-item">Club: {{clubName}}</li>
-      <li class="list-group-item">Nivel: {{overall}}</li>
-    </ul>
-    <div class="card-body">
-        <button type="button" class="btn btn-primary">Consultar</button>
-    </div>
+<div class="card-player" (click)="navigateToPlayer(id)">
+  <img src="{{playerFaceUrl}}" class="card-img-top" alt="Imagen de {{longName}}">
+  <div class="card-body">
+    <h5 class="card-title">{{longName}}</h5>
+    <p class="card-text nationality">{{nationalityName}}</p>
   </div>
+  <ul class="list-group">
+    <li>
+      <div class="list-item-content">
+        <span>Age:</span> <p>{{age}}</p>
+        <span>Nivel:</span> <p>{{overall}}</p>
+      </div>
+    </li>
+    <li>
+      <div class="list-item-content center">
+        <span>Club:</span> <p>{{clubName}}</p>
+      </div>
+    </li>
+  </ul>
+</div>

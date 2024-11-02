@@ -1,6 +1,6 @@
 const { Player } = require("../models");
 
-exports.getAllPlayers = async (page = 1, limit = 10) => {
+exports.getAllPlayers = async (page = 1, limit = 9) => {
   const offset = (page - 1) * limit;
   try {
     const players = await Player.findAll({
