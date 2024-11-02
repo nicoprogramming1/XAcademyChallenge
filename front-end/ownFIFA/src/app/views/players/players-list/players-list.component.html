@@ -1,3 +1,34 @@
 @if(!loading() && error() === null){
-    
+
+    @for(player of players(); track player.id) {
+        <app-card-player 
+            [id]="player.id" 
+            [playerFaceUrl]="player.playerFaceUrl" 
+            [longName]="player.longName" 
+            [age]="player.age" 
+            [nationalityName]="player.nationalityName" 
+            [overall]="player.overall" 
+            [clubName]="player.clubName" 
+        />
+    }
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if(page > 1) {
+                <li class="page-item"><a class="page-link" (click)="loadPlayers(page - 1)">Anterior</a></li>
+                <li class="page-item"><a class="page-link" (click)="loadPlayers(page - 1)">{{ page - 1 }}</a></li>
+            }
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page)">{{ page }}</a></li>
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page + 1)">{{ page + 1 }}</a></li>
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page + 1)">Siguiente</a></li>
+        </ul>
+    </nav>
+}
+@else if(error() !== null) {
+    <span>{{error()}}</span>
+  }
+@else {
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+    </div>
 }

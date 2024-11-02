@@ -1,11 +1,11 @@
 export interface Player {
-  id?: number;
+  id?: number | undefined;
   longName: string;
   age: number;
   playerPositions: string;
   playerFaceUrl: string;
-  clubName?: string;
-  nationalityName?: string;
+  clubName?: string | undefined;
+  nationalityName?: string | undefined;
   preferredFoot?: PreferredFoot;
   bodyType?: BodyType;
   heightCm?: number;

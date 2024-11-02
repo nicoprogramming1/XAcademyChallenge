@@ -17,13 +17,14 @@ export class PlayerService {
   private apiUrl = environment.apiUrl;
   private playerStateService = inject(PlayerStateService);
 
-  fetchPlayers(): Observable<Player[] | null> {
+  fetchPlayers(page: number): Observable<PlayersResponse | null> {
     this.playerStateService.loadingState();
-    return this.http.get<PlayersResponse>(`${this.apiUrl}/player`).pipe(
+    return this.http.get<PlayersResponse>(`${this.apiUrl}/player?page=${page}`).pipe(
       map((res) => {
         if (res.success) {
-          this.playerStateService.loadPlayersState(res.data);
-          return res.data;
+          this.playerStateService.loadPlayersState(res.data.players);
+          console.log("Desde el service, lista de jugadores: ", res.data.players)
+          return res;
         } else {
           throw new Error(res.message);
         }

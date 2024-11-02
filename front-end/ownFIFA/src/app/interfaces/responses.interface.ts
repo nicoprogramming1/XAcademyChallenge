@@ -6,8 +6,14 @@ export interface PlayerResponse {
     data: Player
   }
   
+  // cuando se pide la lista de jugadores la response involucra el total y las páginas en data
   export interface PlayersResponse {
     success: boolean,
     message: string,
-    data: Player[]
+    data: {
+      players: Player[],
+      totalCount: number,
+      totalPages:  number,
+      currentPage:  number,
+    }
   }

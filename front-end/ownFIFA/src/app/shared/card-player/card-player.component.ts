@@ -9,11 +9,11 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card-player.component.scss'
 })
 export class CardPlayerComponent {
-  @Input() photoUrl!: string
+  @Input() playerFaceUrl!: string
   @Input() longName!: string
   @Input() age!: number
-  @Input() nationality!: string
+  @Input() nationalityName: string | undefined = "Desconocida"
   @Input() overall!: number
-  @Input() club!: string
-  @Input() id!: string
+  @Input() clubName: string | undefined  = "Desconocido"
+  @Input() id!: number | undefined 
 }

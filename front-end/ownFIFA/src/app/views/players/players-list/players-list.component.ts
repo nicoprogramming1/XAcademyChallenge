@@ -3,13 +3,15 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
+import { CardPlayerComponent } from '../../../shared/card-player/card-player.component';
 
 @Component({
   selector: 'app-players-list',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CardPlayerComponent
   ],
   templateUrl: './players-list.component.html',
   styleUrl: './players-list.component.scss',
@@ -23,15 +25,22 @@ export class PlayersListComponent {
   public successMessage = this.playerStateService.successMessage;
   public players = this.playerStateService.players;
 
+  public page: number = 1
+
   ngOnInit(): void {
-    this.loadPlayers();
+    setTimeout(() => {  // simular retardo de api
+      this.loadPlayers(this.page);
+    }, 3000)
   }
 
-  loadPlayers() {
-    this.playerService.fetchPlayers().subscribe({
-      // actualiza el state de jugadores
+  loadPlayers(page: number) {
+    // actualiza el state lista de jugadores para la page actual
+    console.log("loadPlayers page: ", page)
+    this.playerService.fetchPlayers(page).subscribe({
       next: (res) => {
-        console.log(`Se devuelven con éxito ${res?.length} jugadores`);
+        this.page = page
+        console.log(`Se devuelven con éxito ${res?.data.players.length} jugadores para la página ${page}`);
+        console.log("Desde loadPlayers, lista de jugadores: ", res?.data.players)
       },
       error: (err) => {
         console.log('Error al cargar jugadores: ', err.message);
