@@ -22,7 +22,7 @@ exports.getAllPlayers = async (req, res) => {
 };
 
 exports.getPlayerById = async (req, res) => {
-    const id = req.data
+    const id = req.params.id
     console.log("El id en el controller es: ", id)
     try {
         const result = await playerService.getPlayerById(id)
