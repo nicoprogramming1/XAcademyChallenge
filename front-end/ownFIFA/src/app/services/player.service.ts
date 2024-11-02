@@ -82,6 +82,24 @@ export class PlayerService {
     );
   }
 
+  deletePlayer(id: number): Observable<Player | null> {
+    this.playerStateService.loadingState()
+    return this.http.delete<PlayerResponse>(`${this.apiUrl}/player/${id}`).pipe(
+      map(res => {
+        if(res.success) {
+          this.playerStateService.deletePlayerState(id)
+          return res.data
+        }else {
+          throw new Error(res.message)
+        }
+      }),
+      catchError(err => {
+        this.handleError(err.message)
+        return of(null)
+      })
+    )
+  }
+
   private handleError(err: string) {
     this.playerStateService.errorState(err);
     console.error('Se ha producido un error (desde el handleError): ', err);
