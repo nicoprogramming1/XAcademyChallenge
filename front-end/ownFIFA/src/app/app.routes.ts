@@ -15,4 +15,11 @@ export const routes: Routes = [
         './views/players/players-list/players-list.component'
       ).then((m) => m.PlayersListComponent),
   },
+  {
+    path: 'player/:id',
+    loadComponent: () =>
+      import(
+        './views/players/player/player.component'
+      ).then((m) => m.PlayerComponent),
+  },
 ];

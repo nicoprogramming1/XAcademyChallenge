@@ -43,10 +43,11 @@ export class PlayerService {
 
   getPlayerById(id: number): Observable<Player | null> {
     this.playerStateService.loadingState();
-    return this.http.get<PlayerResponse>(`${this.apiUrl}/player/:${id}`).pipe(
+    return this.http.get<PlayerResponse>(`${this.apiUrl}/player/${id}`).pipe(
       map((res) => {
         if (res.success) {
           this.playerStateService.loadPlayerState(res.data);
+          console.log("Desde el service en el front: ", res.data)
           return res.data;
         } else {
           throw new Error(res.message);
