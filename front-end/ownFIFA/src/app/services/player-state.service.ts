@@ -60,4 +60,13 @@ export class PlayerStateService {
       successMessage: 'El jugador ha sido registrado con éxito!',
     }));
   }
+
+  public deletePlayerState(id: number) {
+    this.#state.update(state => ({
+      ...state,
+      loading: false,
+      error: null,
+      successMessage: "El jugador ha sido eliminado con éxito!"
+    }))
+  }
 }
