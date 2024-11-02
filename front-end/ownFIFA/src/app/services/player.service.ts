@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { PlayerStateService } from './player-state.service';
 import { Player } from '../interfaces/player.interface';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, finalize, map, Observable, of } from 'rxjs';
 import {
   PlayerResponse,
   PlayersResponse,
@@ -37,6 +37,9 @@ export class PlayerService {
         catchError((err) => {
           this.handleError(err.message);
           return of(null);
+        }),
+        finalize(() => {
+          this.playerStateService.stopLoadingState();
         })
       );
   }
@@ -47,7 +50,7 @@ export class PlayerService {
       map((res) => {
         if (res.success) {
           this.playerStateService.loadPlayerState(res.data);
-          console.log("Desde el service en el front: ", res.data)
+          console.log('Desde el service en el front: ', res.data);
           return res.data;
         } else {
           throw new Error(res.message);
@@ -56,6 +59,9 @@ export class PlayerService {
       catchError((err) => {
         this.handleError(err.message);
         return of(null);
+      }),
+      finalize(() => {
+        this.playerStateService.stopLoadingState();
       })
     );
   }
@@ -72,32 +78,41 @@ export class PlayerService {
           );
           return res.data;
         } else {
-          throw new Error(res.message);
+          throw new Error(res.message || 'Error desconocido');
         }
       }),
       catchError((err) => {
-        this.handleError(err.message);
+        const errorMessage = err.message || 'Error al guardar el jugador';
+        this.handleError(errorMessage);
         return of(null);
+      }),
+      finalize(() => {
+        this.playerStateService.stopLoadingState();
       })
     );
   }
 
   deletePlayer(id: number): Observable<Player | null> {
-    this.playerStateService.loadingState()
+    this.playerStateService.loadingState();
     return this.http.delete<PlayerResponse>(`${this.apiUrl}/player/${id}`).pipe(
-      map(res => {
-        if(res.success) {
-          this.playerStateService.deletePlayerState(id)
-          return res.data
-        }else {
-          throw new Error(res.message)
+      map((res) => {
+        if (res.success) {
+          this.playerStateService.deletePlayerState(id);
+          return res.data;
+        } else {
+          throw new Error(res.message || 'Error desconocido');
         }
       }),
-      catchError(err => {
-        this.handleError(err.message)
-        return of(null)
+      catchError((err) => {
+        const errorMessage =
+          err.message || 'Error en la eliminación del jugador';
+        this.handleError(errorMessage);
+        return of(null);
+      }),
+      finalize(() => {
+        this.playerStateService.stopLoadingState(); // Asegura que el estado de carga se detenga
       })
-    )
+    );
   }
 
   private handleError(err: string) {

@@ -23,6 +23,13 @@ export class PlayerStateService {
     this.#state.update((state) => ({ ...state, loading: true, error: null }));
   }
 
+  public stopLoadingState() {
+    this.#state.update(state => ({
+      ...state,
+      loading: false
+    }))
+  }
+
   public errorState(message: string) {
     this.#state.update((state) => ({
       ...state,
