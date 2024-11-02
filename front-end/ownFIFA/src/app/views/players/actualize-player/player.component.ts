@@ -64,7 +64,7 @@ export class PlayerComponent {
     this.playerService.deletePlayer(id).subscribe({
       next: res => {
         console.log("Jugador eliminado con éxito")
-        this.router.navigate(["/player"])
+        this.router.navigate(["/players"])
       },
       error: err => {
         alert("Se ha producido un error en la eliminación del jugador!")
