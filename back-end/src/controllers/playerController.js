@@ -1,4 +1,5 @@
 const playerService = require("../services/playerService");
+const { validationResult } = require("express-validator");
 
 exports.getAllPlayers = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -85,6 +86,45 @@ exports.deletePlayer = async (req, res) => {
       success: false,
       message: "Error al intentar eliminar el jugador",
       data: null,
+    });
+  }
+};
+
+exports.updatePlayer = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "Datos inválidos",
+        errors: errors.array(),
+      });
+  }
+
+  const { id } = req.params;
+  const playerData = req.body;
+
+  try {
+    const updatedPlayer = await playerService.updatePlayer(id, playerData);
+
+    if (!updatedPlayer) {
+      return res.status(404).json({
+        success: false,
+        message: "El jugador no se encontró o no pudo actualizarse",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "El jugador se ha actualizado con éxito",
+      data: updatedPlayer,
+    });
+  } catch (error) {
+    console.error("Error en updatePlayer controller:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error interno al actualizar el jugador",
     });
   }
 };

@@ -37,7 +37,6 @@ exports.getPlayerById = async (id) => {
   }
 };
 
-
 exports.createPlayer = async (playerData) => {
   try {
     const newPlayer = await Player.create(playerData);
@@ -64,3 +63,20 @@ exports.deletePlayer = async (id) => {
   }
 };
 
+exports.updatePlayer = async (id, playerData) => {
+  try {
+    const [affectedRows, [updatedPlayer]] = await Player.update(playerData, {
+      where: { id },
+      returning: true,
+    });
+
+    if (affectedRows === 0) {
+      throw new Error(`No se pudo actualizar el jugador con id ${id}`);
+    }
+
+    return updatedPlayer;
+  } catch (error) {
+    console.error("Error en el servicio updatePlayer:", error);
+    throw error;
+  }
+};
