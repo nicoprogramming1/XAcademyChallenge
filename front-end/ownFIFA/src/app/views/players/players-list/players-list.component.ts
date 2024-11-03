@@ -3,13 +3,15 @@ import { Component, inject } from '@angular/core';
 import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
 import { CardPlayerComponent } from '../../../shared/card-player/card-player.component';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-players-list',
   standalone: true,
   imports: [
     CommonModule,
-    CardPlayerComponent
+    CardPlayerComponent,
+    LoadingSpinnerComponent
   ],
   templateUrl: './players-list.component.html',
   styleUrl: './players-list.component.scss',

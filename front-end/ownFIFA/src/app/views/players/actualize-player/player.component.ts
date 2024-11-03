@@ -3,11 +3,12 @@ import { Component, inject } from '@angular/core';
 import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingSpinnerComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
@@ -20,7 +21,7 @@ export class PlayerComponent {
   public loading = this.playerStateService.loading;
   public error = this.playerStateService.error;
   public successMessage = this.playerStateService.successMessage;
-  public player = this.playerStateService.player; // tiene el player desde el state
+  public player = this.playerStateService.player; // tiene el player actualizado desde el state
 
   private id!: number | null;
   public editMode: boolean = false;
@@ -37,7 +38,7 @@ export class PlayerComponent {
   loadPlayer(id: number) {
     this.playerService.getPlayerById(id).subscribe({
       next: (res) => {
-        // el jugador es cargado en el state durante el service
+        // el jugador es cargado en el state durante el getPlayerById del service
         console.log('loadPlayer: se recuperó el jugador: ', res?.longName);
       },
       error: (err) => {
