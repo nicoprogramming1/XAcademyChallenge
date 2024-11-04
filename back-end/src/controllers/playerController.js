@@ -4,9 +4,18 @@ const { validationResult } = require("express-validator");
 exports.getAllPlayers = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 9;
+  const club = req.query.club
+  const nationality = req.query.nationality
+  const age = req.query.age ? parseInt(req.query.age) : undefined; // solo parsea si undefined
+  const longName = req.query.longName
 
   try {
-    const result = await playerService.getAllPlayers(page, limit);
+    const result = await playerService.getAllPlayers(page, limit, {
+      club,
+      nationality,
+      age,
+      longName,
+    });
     res.status(200).json({
       success: true,
       message: "Jugadores obtenidos exitosamente",
