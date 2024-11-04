@@ -80,6 +80,21 @@ Player.init(
       allowNull: false,
       field: 'potential'
     },
+    passing: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'passing'
+    },
+    dribbling: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'dribbling'
+    },
+    shooting: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'shooting'
+    },
   },
   {
     sequelize,
