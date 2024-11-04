@@ -32,7 +32,8 @@ export class PlayerService {
         }
       }),
       catchError((err) => {
-        this.handleError(err.message);
+        const errorMessage = err.message || 'Error al recuperar los jugadores';
+        this.handleError(errorMessage);
         return of(null);
       }),
       finalize(() => {
@@ -59,7 +60,8 @@ export class PlayerService {
         }
       }),
       catchError((err) => {
-        this.handleError(err.message);
+        const errorMessage = err.message || 'Error al recuperar el jugador';
+        this.handleError(errorMessage);
         return of(null);
       }),
       finalize(() => {
@@ -82,7 +84,7 @@ export class PlayerService {
           console.log('Se ha creado con éxito el/la jugador/a ', res.data.longName);
           return res.data;
         } else {
-          throw new Error(res.message || 'Error desconocido');
+          throw new Error(res.message);
         }
       }),
       catchError((err) => {
@@ -109,7 +111,30 @@ export class PlayerService {
           this.playerStateService.deletePlayerState(id);
           return res.data;
         } else {
-          throw new Error(res.message || 'Error desconocido');
+          throw new Error(res.message);
+        }
+      }),
+      catchError((err) => {
+        const errorMessage = err.message || 'Error en la eliminación del jugador';
+        this.handleError(errorMessage);
+        return of(null);
+      }),
+      finalize(() => {
+        this.playerStateService.stopLoadingState();
+      })
+    );
+  }
+
+  updatePlayer(id: number, playerData: Partial<Player>): Observable<Player | null> {
+    this.playerStateService.loadingState()
+    return this.http.put<PlayerResponse>(`${this.apiUrl}/player/${id}`, playerData).pipe(
+      map(res => {
+        if(res.success){
+          this.playerStateService.updatePlayerState(res.data)
+        return res.data
+        }
+        else {
+          throw new Error(res.message)
         }
       }),
       catchError((err) => {

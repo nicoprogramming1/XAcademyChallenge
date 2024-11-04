@@ -76,6 +76,7 @@ exports.updatePlayer = async (id, playerData) => {
 
     // Recuperamos el jugador actualizado con una consulta adicional
     const updatedPlayer = await Player.findByPk(id);
+    console.log("Desde el service, el updatedPlayer: ", updatedPlayer)
 
     return updatedPlayer;
   } catch (error) {

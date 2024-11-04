@@ -4,11 +4,18 @@ import { PlayerService } from '../../../services/player.service';
 import { PlayerStateService } from '../../../services/player-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Player } from '../../../interfaces/player.interface';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule, LoadingSpinnerComponent],
+  imports: [
+    CommonModule,
+    LoadingSpinnerComponent,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
@@ -16,7 +23,7 @@ export class PlayerComponent {
   private playerService = inject(PlayerService);
   private playerStateService = inject(PlayerStateService);
   private route = inject(ActivatedRoute);
-  private router = inject(Router)
+  private router = inject(Router);
 
   public loading = this.playerStateService.loading;
   public error = this.playerStateService.error;
@@ -24,13 +31,16 @@ export class PlayerComponent {
   public player = this.playerStateService.player; // tiene el player actualizado desde el state
 
   private id!: number | null;
-  public editMode: boolean = false;
+  public editMode!: boolean;
+  public editablePlayer: Partial<Player> | null = null; // copia parcial editable de player
 
   ngOnInit(): void {
+    this.editMode = false;
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (this.id !== null) {
       this.loadPlayer(this.id);
     } else {
+      // necesito una pantalla de error aqui
       console.error('El id del jugador es nulo');
     }
   }
@@ -52,29 +62,60 @@ export class PlayerComponent {
       '¿Está seguro de que desea eliminar el/la jugador/a?'
     );
     if (confirmed) {
-      if(this.id !== null) {
+      if (this.id !== null) {
         this.deletePlayer(this.id);
-      }
-      else {
-        console.error("El id del jugador a eliminar es nulo")
+      } else {
+        console.error('El id del jugador a eliminar es nulo');
       }
     }
   }
 
   deletePlayer(id: number): void {
     this.playerService.deletePlayer(id).subscribe({
-      next: res => {
-        console.log("Jugador eliminado con éxito")
-        this.router.navigate(["/players"])
+      next: (res) => {
+        console.log('Jugador eliminado con éxito', res);
+        this.redirect();
       },
-      error: err => {
-        alert("Se ha producido un error en la eliminación del jugador!")
-        console.error("Ha ocurrido un error al eliminar el jugador")
-      }
-    })
+      error: (err) => {
+        alert('Se ha producido un error en la eliminación del jugador!');
+        console.error('Ha ocurrido un error al eliminar el jugador', err);
+      },
+    });
   }
 
+  redirect(): void {
+    this.router.navigate(['/players']);
+  }
+
+  // cambia entre las vistas de sólo lectua y edición
   toggleEdit(): void {
-    !this.editMode;
+    this.editMode = !this.editMode;
+    if (this.editMode && this.player()) {
+      this.editablePlayer = { ...this.player() }; // copia los datos de la signal
+      console.log("Desde el toggleEdit, editablePlayer es: ", this.editablePlayer)
+    }
+  }
+
+  onSaveChanges(): void {
+    this.editablePlayer = { ...this.player() };
+    if (this.editablePlayer) {
+      this.playerService.updatePlayer(this.id!, this.editablePlayer).subscribe({
+        next: (res) => {
+          console.log('Jugador guardado con éxito', res);
+          this.editMode = false; // desactivar el modo de edicion
+        },
+        error: (err) => {
+          alert('Se ha producido un error en el guardado del jugador!');
+          console.error('Ha ocurrido un error al guardar el jugador', err);
+        },
+      });
+      console.log('Guardando cambios de jugador: ', this.editablePlayer);
+    }
+  }
+  
+
+  cancelEdit(): void {
+    this.editablePlayer = null;
+    this.toggleEdit()
   }
 }
