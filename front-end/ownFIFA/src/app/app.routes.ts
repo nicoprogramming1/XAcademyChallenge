@@ -19,7 +19,7 @@ export const routes: Routes = [
     path: 'player/:id',
     loadComponent: () =>
       import(
-        './views/players/actualize-player/player.component'
+        './views/players/player-actualization/player.component'
       ).then((m) => m.PlayerComponent),
   },
 ];
