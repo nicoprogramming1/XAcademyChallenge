@@ -24,10 +24,10 @@ export class PlayerStateService {
   }
 
   public stopLoadingState() {
-    this.#state.update(state => ({
+    this.#state.update((state) => ({
       ...state,
-      loading: false
-    }))
+      loading: false,
+    }));
   }
 
   public errorState(message: string) {
@@ -39,13 +39,13 @@ export class PlayerStateService {
   }
 
   public loadPlayerState(player: Player) {
-    this.#state.update(state => ({
+    this.#state.update((state) => ({
       ...state,
       loading: false,
       error: null,
       player,
-      successMessage: "Jugador cargado con éxito"
-    }))
+      successMessage: 'Jugador cargado con éxito',
+    }));
   }
 
   public loadAllPlayersState(players: Player[]) {
@@ -69,11 +69,21 @@ export class PlayerStateService {
   }
 
   public deletePlayerState(id: number) {
+    this.#state.update((state) => ({
+      ...state,
+      loading: false,
+      error: null,
+      successMessage: 'El jugador ha sido eliminado con éxito!',
+    }));
+  }
+
+  public updatePlayerState(player: Player) {
     this.#state.update(state => ({
       ...state,
       loading: false,
       error: null,
-      successMessage: "El jugador ha sido eliminado con éxito!"
+      successMessage: "El jugador fue actualizado con éxito",
+      player
     }))
   }
 }
