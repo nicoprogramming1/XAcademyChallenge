@@ -55,7 +55,7 @@ exports.deletePlayer = async (id) => {
 
     const playersDestroyed = await Player.destroy({ where: { id } });
 
-    // Retornar `true` si se eliminó al menos un jugador
+    // devuelve true si al menos un jugador fue actualizado
     return playersDestroyed > 0;
   } catch (error) {
     console.error("Error en playerService:", error);
@@ -65,14 +65,17 @@ exports.deletePlayer = async (id) => {
 
 exports.updatePlayer = async (id, playerData) => {
   try {
-    const [affectedRows, [updatedPlayer]] = await Player.update(playerData, {
-      where: { id },
-      returning: true,
+    const [affectedRows] = await Player.update(playerData, {
+      where: { id },  // returning: true parece no funcionar en mySql?
     });
-
+    console.log("Las filas afectadas son: ", affectedRows)
+    // Si no se ha afectado ninguna fila, lanzamos un error
     if (affectedRows === 0) {
-      throw new Error(`No se pudo actualizar el jugador con id ${id}`);
+      throw new Error(`El jugador con ID ${id} no pudo ser actualizado`);
     }
+
+    // Recuperamos el jugador actualizado con una consulta adicional
+    const updatedPlayer = await Player.findByPk(id);
 
     return updatedPlayer;
   } catch (error) {
@@ -80,3 +83,5 @@ exports.updatePlayer = async (id, playerData) => {
     throw error;
   }
 };
+
+

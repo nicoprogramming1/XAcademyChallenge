@@ -93,13 +93,11 @@ exports.deletePlayer = async (req, res) => {
 exports.updatePlayer = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "Datos inválidos",
-        errors: errors.array(),
-      });
+    return res.status(400).json({
+      success: false,
+      message: "Datos inválidos",
+      errors: errors.array(),
+    });
   }
 
   const { id } = req.params;
@@ -111,20 +109,22 @@ exports.updatePlayer = async (req, res) => {
     if (!updatedPlayer) {
       return res.status(404).json({
         success: false,
-        message: "El jugador no se encontró o no pudo actualizarse",
+        message: "El jugador no se pudo actualizar",
+        data: null,
       });
     }
 
     return res.status(200).json({
       success: true,
-      message: "El jugador se ha actualizado con éxito",
+      message: "La actualización se ha realizado con éxito",
       data: updatedPlayer,
     });
   } catch (error) {
     console.error("Error en updatePlayer controller:", error);
     return res.status(500).json({
       success: false,
-      message: "Error interno al actualizar el jugador",
+      message: "Ocurrió un error durante la actualización",
+      data: null,
     });
   }
 };
