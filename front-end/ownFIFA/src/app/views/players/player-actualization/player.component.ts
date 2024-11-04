@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Player } from '../../../interfaces/player.interface';
+import { Chart, ChartType, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-player',
@@ -33,7 +35,8 @@ export class PlayerComponent {
   private id!: number | null;
   public editMode!: boolean;
   public editablePlayer: Partial<Player> | null = null; // copia parcial editable de player
-
+  public skillsChart!: Chart;
+  
   ngOnInit(): void {
     this.editMode = false;
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -50,6 +53,9 @@ export class PlayerComponent {
       next: (res) => {
         // el jugador es cargado en el state durante el getPlayerById del service
         console.log('loadPlayer: se recuperó el jugador: ', res?.longName);
+        setTimeout(() => {
+          this.renderSkillsChart(); // renderiza el chart
+        }, 0); // 0 ms para asegurarte que se ejecute después de que el DOM esté actualizado
       },
       error: (err) => {
         console.error('Error recuperando el jugador con el id: ', id);
@@ -90,7 +96,7 @@ export class PlayerComponent {
   // cambia entre las vistas de sólo lectua y edición
   toggleEdit(): void {
     this.editMode = !this.editMode;
-    if (this.editMode && this.player()) {
+    if(this.editMode && this.player()) {
       this.editablePlayer = { ...this.player() }; // copia los datos de la signal
       console.log("Desde el toggleEdit, editablePlayer es: ", this.editablePlayer)
     }
@@ -102,7 +108,7 @@ export class PlayerComponent {
       this.playerService.updatePlayer(this.id!, this.editablePlayer).subscribe({
         next: (res) => {
           console.log('Jugador guardado con éxito', res);
-          this.editMode = false; // desactivar el modo de edicion
+          this.toggleEdit() // vuelve a modo readOnly
         },
         error: (err) => {
           alert('Se ha producido un error en el guardado del jugador!');
@@ -117,5 +123,51 @@ export class PlayerComponent {
   cancelEdit(): void {
     this.editablePlayer = null;
     this.toggleEdit()
+  }
+
+  renderSkillsChart() {
+    if (this.skillsChart) {
+      this.skillsChart.destroy(); // se asegura que no haya otro grafico
+    }
+  
+    const player = this.player();
+    console.log("Desde el renderChart, player cargado: ", player)
+    
+    // filtra los datos para asegurar de que no haya valores undefined
+    const shooting = player?.shooting ?? 0;
+    const dribbling = player?.dribbling ?? 0;
+    const passing = player?.passing ?? 0;
+    const overall = player?.overall ?? 0;
+    const potential = player?.potential ?? 0;
+
+    const data = {
+      labels: ['Disparo', 'Regateo', 'Pase', "General", "Potencial"],
+      datasets: [
+        {
+          label: player?.longName,
+          data: [shooting, dribbling, passing, overall, potential],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+        },
+      ],
+    };
+  
+    this.skillsChart = new Chart('skillsRadarChart', {
+      type: 'radar' as ChartType,
+      data: data,
+      options: {
+        scales: {
+          r: {
+            min: 0,
+            max: 100,
+            ticks: {
+              display: false,
+              stepSize: 1,
+            },
+          },
+        },
+      },
+    });
   }
 }
