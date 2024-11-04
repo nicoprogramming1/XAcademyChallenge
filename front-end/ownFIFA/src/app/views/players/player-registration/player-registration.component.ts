@@ -65,6 +65,9 @@ export class PlayerRegistrationComponent {
       overall: new FormControl('', Validators.required),
       fifaVersion: new FormControl('', Validators.required),
       fifaUpdate: new FormControl('', Validators.required),
+      passing: new FormControl(''),
+      dribbling: new FormControl(''),
+      shooting: new FormControl(''),
     });
   }
 
@@ -103,6 +106,9 @@ export class PlayerRegistrationComponent {
         overall: formValues.overall,
         fifaVersion: formValues.fifaVersion,
         fifaUpdate: formValues.fifaUpdate,
+        passing: formValues.passing || null,
+        dribbling: formValues.dribbling || null,
+        shooting: formValues.shooting || null,
       };
 
       this.playerService.savePlayer(player).subscribe({

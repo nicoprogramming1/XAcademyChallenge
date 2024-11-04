@@ -14,16 +14,17 @@ export interface Player {
   overall: number;
   fifaVersion: number;
   fifaUpdate: number;
-  skills?: string;
+  passing?: number;
+  dribbling?: number;
+  shooting?: number;
 }
 
-
 export interface PlayerState {
-  loading: boolean,
-  error: string | null,
-  player: Player | null,
-  players: Player[],
-  successMessage: string | null
+  loading: boolean;
+  error: string | null;
+  player: Player | null;
+  players: Player[];
+  successMessage: string | null;
 }
 
 export enum PlayerPositions {
@@ -57,25 +58,25 @@ export enum BodyType {
 }
 
 export enum FifaVersion {
-  TWENTYTWO = "22",
-  TWENTYTHREE = "23",
-  TWENTYFOUR = "24",
+  TWENTYTWO = '22',
+  TWENTYTHREE = '23',
+  TWENTYFOUR = '24',
 }
 
 export enum FifaUpdate {
-  TEN = "10",
-  NINE = "9",
-  EIGHT = "8",
-  SEVEN = "7",
-  SIX = "6",
-  FIVE = "5",
-  FOUR = "4",
-  THREE = "3",
-  TWO = "2",
-  ONE = "1"
+  TEN = '10',
+  NINE = '9',
+  EIGHT = '8',
+  SEVEN = '7',
+  SIX = '6',
+  FIVE = '5',
+  FOUR = '4',
+  THREE = '3',
+  TWO = '2',
+  ONE = '1',
 }
 
 export enum playerFaceUrl {
-  ROSTROA = "https://cdn.sofifa.net/players/227/204/23_120.png",
-  ROSTROB = "https://cdn.sofifa.net/players/227/354/23_120.png"
+  ROSTROA = 'https://cdn.sofifa.net/players/227/204/23_120.png',
+  ROSTROB = 'https://cdn.sofifa.net/players/227/354/23_120.png',
 }

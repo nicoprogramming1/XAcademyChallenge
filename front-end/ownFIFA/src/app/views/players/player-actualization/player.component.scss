@@ -1,12 +1,14 @@
-.container {
+  .container {
     max-width: 600px;
   }
-  
+
   .player-card {
     border-radius: 8px;
     overflow: hidden;
     margin-top: 20px;
   }
+
+
   
   .player-image {
     width: 100%;
@@ -18,6 +20,12 @@
 
   .player-atribute {
     font-weight: bold;
+  }
+
+  #skillsRadarChart {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 20px;
   }
   
   .card-body {
@@ -37,5 +45,8 @@
   
   button {
     font-size: 1rem;
+    width: 45%;
+    max-width: 200px;
+    margin: 5px 0;
   }
   
