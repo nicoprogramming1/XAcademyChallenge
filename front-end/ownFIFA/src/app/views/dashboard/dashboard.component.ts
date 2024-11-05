@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidemenuComponent } from '../../shared/sidemenu/sidemenu.component';
+import { LogoutComponent } from '../login/logout/logout.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet, SidemenuComponent],
+  imports: [RouterOutlet, SidemenuComponent, LogoutComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
