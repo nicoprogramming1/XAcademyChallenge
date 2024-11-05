@@ -16,9 +16,9 @@ import {
   playerFaceUrl,
   PlayerPositions,
   PreferredFoot,
-} from '../../../interfaces/player.interface';
-import { PlayerService } from '../../../services/player.service';
-import { PlayerStateService } from '../../../services/player-state.service';
+} from '../../../../interfaces/player.interface';
+import { PlayerService } from '../../../../services/player.service';
+import { PlayerStateService } from '../../../../services/player-state.service';
 
 @Component({
   selector: 'app-player-registration',
