@@ -36,7 +36,7 @@ app.use(
 // ROUTES
 app.use("/player", authMdw, playerRouter);
 app.use("/login", loginRouter);
-app.use("/user", userRouter);
+app.use("/user", authMdw, userRouter);
 
 // Static files
 app.use("/static", express.static(path.join(__dirname, "static")));
