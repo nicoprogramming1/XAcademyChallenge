@@ -1,4 +1,5 @@
 import { Player } from "./player.interface"
+import { User } from "./user.interface"
 
 export interface PlayerResponse {
     success: boolean,
@@ -16,4 +17,10 @@ export interface PlayerResponse {
       totalPages:  number,
       currentPage:  number,
     }
+  }
+
+  export interface UserResponse {
+    success: boolean,
+    message: string,
+    data: User
   }
