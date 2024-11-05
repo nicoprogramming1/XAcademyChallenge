@@ -1,6 +1,5 @@
-const express = require("express");
-const router = express.Router();
 const playerRouter = require("./player");
 const loginRouter = require("./login");
+const userRouter = require("./user")
 
-module.exports = { playerRouter, loginRouter };
+module.exports = { playerRouter, loginRouter, userRouter };

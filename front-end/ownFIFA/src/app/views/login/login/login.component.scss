@@ -1,0 +1,20 @@
+.container {
+    max-width: 400px; /* Ajusta el ancho según sea necesario */
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #007bff; /* Color del título */
+}
+
+.btn-primary {
+    width: 100%; /* Botón ocupa todo el ancho */
+}
+
+.alert {
+    text-align: center; /* Mensajes de alerta centrados */
+}

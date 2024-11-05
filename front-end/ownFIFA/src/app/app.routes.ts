@@ -37,6 +37,20 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'users',
+    loadComponent: () =>
+      import('./views/users/user-registration/user-registration.component').then(
+        (m) => m.UserRegistrationComponent
+      ),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./views/login/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
