@@ -8,7 +8,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const { headerMdw, authMdw } = require("./middleware");
-const { playerRouter, loginRouter } = require("./routes");
+const { playerRouter, loginRouter, userRouter } = require("./routes");
 const sequelize = require("./config/database");
 const passport = require("./util/passportConfig")
 
@@ -36,6 +36,7 @@ app.use(
 // ROUTES
 app.use("/player", authMdw ,playerRouter);
 app.use("/login", loginRouter);
+app.use("/user", userRouter);
 
 // Static files
 app.use("/static", express.static(path.join(__dirname, "static")));
