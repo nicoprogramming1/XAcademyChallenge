@@ -34,7 +34,7 @@ app.use(
 );
 
 // ROUTES
-app.use("/player", authMdw ,playerRouter);
+app.use("/player", authMdw, playerRouter);
 app.use("/login", loginRouter);
 app.use("/user", userRouter);
 
