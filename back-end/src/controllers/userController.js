@@ -1,5 +1,25 @@
 const userService = require("../services/userService");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+const { authenticateUser } = require("../providers/authProvider");
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const { token, user } = await authenticateUser(email, password);
+    res.status(200).json({
+      success: true,
+      message: "Inicio de sesión exitoso. Bienvenido!",
+      data: user,
+      token,
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: "No fue posible iniciar sesión",
+      data: null,
+    });
+  }
+};
 
 exports.createUser = async (req, res) => {
   const { firstName, lastName, email, password, role } = req.body;
@@ -7,7 +27,13 @@ exports.createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10); // hashea la pass
 
-    const userData = { firstName, lastName, email, password: hashedPassword, role };
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      role,
+    };
 
     const registeredUser = await userService.createUser(userData);
 
