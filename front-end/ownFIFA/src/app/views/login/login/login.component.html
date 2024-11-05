@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="container mt-5">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h2 class="text-center">Iniciar Sesión</h2>
+        <hr class="my-4" />
+        <div class="form-group mb-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" formControlName="email" required />
+            @if(email?.invalid && (email?.dirty || email?.touched)) {
+            <div class="text-danger">
+                @if(email?.errors?.["required"]) {
+                <div>El email es obligatorio.</div>
+
+                } @if(email?.errors?.["email"]) {
+
+                <div>Formato de email inválido.</div>
+                }
+            </div>
+
+            }
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password">Contraseña:</label>
+            <input type="password" class="form-control" id="password" formControlName="password" required />
+            @if(password?.invalid && (password?.dirty || password?.touched)){
+            <div class="text-danger">
+                @if(password?.errors?.["required"]) {
+                <div>La contraseña es obligatoria.</div>
+                }
+            </div>
+
+            }
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+        @if(errorMessage) {
+        <div class="alert alert-danger mt-3">
+            {{ errorMessage }}
+        </div>
+        } @if(successMessage) {
+        <div class="alert alert-success mt-3">
+            {{ successMessage }}
+        </div>
+        }
+    </form>
+</div>
