@@ -1,3 +1,4 @@
 const { headerMdw, playerValidation } = require("./headerMdw");
+const authMdw = require("./authMdw");
 
-module.exports = { headerMdw, playerValidation };
+module.exports = { headerMdw, playerValidation, authMdw };

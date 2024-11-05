@@ -1,14 +1,20 @@
 require("dotenv").config({ path: "./environments/environment.env" });
 
+// Importa el modelo User para que Sequelize lo sincronice
+const User = require("./models/User");
+
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
-const { headerMdw } = require("./middleware");
-const { playerRouter } = require("./routes");
+const { headerMdw, authMdw } = require("./middleware");
+const { playerRouter, loginRouter } = require("./routes");
 const sequelize = require("./config/database");
+const passport = require("./util/passportConfig")
+
 
 const app = express();
+app.use(passport.initialize());
 
 // SETTINGS
 app.set("appName", "ownFIFA");
@@ -28,7 +34,8 @@ app.use(
 );
 
 // ROUTES
-app.use("/player", playerRouter);
+app.use("/player", authMdw ,playerRouter);
+app.use("/login", loginRouter);
 
 // Static files
 app.use("/static", express.static(path.join(__dirname, "static")));
@@ -42,8 +49,8 @@ app.listen(app.get("port"), async () => {
     await sequelize.authenticate();
     console.log("Conexión a la base de datos establecida exitosamente desde app.listen");
 
-    // si necesitara que la estructura de la db cambie al correr desde los modelos:
-    // await sequelize.sync({ alter: true }); force: true elimina y recrea tablas
+    // Esto sincroniza el modelo User con la base de datos para crear la tabla users
+    // await User.sync({ force: true });
 
     console.log("Sincronización con la base de datos completada.");
   } catch (error) {
