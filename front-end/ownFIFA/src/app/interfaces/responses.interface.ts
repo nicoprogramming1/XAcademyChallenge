@@ -22,5 +22,6 @@ export interface PlayerResponse {
   export interface UserResponse {
     success: boolean,
     message: string,
-    data: User
+    data: User,
+    token?: string;
   }
