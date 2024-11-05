@@ -1,26 +1,41 @@
 const playerService = require("../services/playerService");
 const { validationResult } = require("express-validator");
+const { playerValidationRules, validatePlayer } = require('../middleware/playerValidation');
 
-exports.getAllPlayers = async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 9;
+exports.getAllPlayers = [
+  playerValidationRules(), // Aplicar las reglas de validación
+  validatePlayer,          // Validar los parámetros
 
-  try {
-    const result = await playerService.getAllPlayers(page, limit);
-    res.status(200).json({
-      success: true,
-      message: "Jugadores obtenidos exitosamente",
-      data: result,
-    });
-  } catch (error) {
-    console.error("Error al obtener jugadores:", error);
-    res.status(500).json({
-      success: false,
-      message: "Error al obtener jugadores",
-      data: null,
-    });
+  async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 9;
+    const club = req.query.club;
+    const nationality = req.query.nationality;
+    const age = req.query.age ? parseInt(req.query.age) : undefined;
+    const longName = req.query.longName;
+
+    try {
+      const result = await playerService.getAllPlayers(page, limit, {
+        club,
+        nationality,
+        age,
+        longName,
+      });
+      res.status(200).json({
+        success: true,
+        message: "Jugadores obtenidos exitosamente",
+        data: result,
+      });
+    } catch (error) {
+      console.error("Error al obtener jugadores:", error);
+      res.status(500).json({
+        success: false,
+        message: "Error al obtener jugadores",
+        data: null,
+      });
+    }
   }
-};
+];
 
 exports.getPlayerById = async (req, res) => {
   const id = req.params.id;

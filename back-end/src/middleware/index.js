@@ -1,3 +1,3 @@
-const { headerMdw } = require("./headerMdw");
+const { headerMdw, playerValidation } = require("./headerMdw");
 
-module.exports = { headerMdw };
+module.exports = { headerMdw, playerValidation };

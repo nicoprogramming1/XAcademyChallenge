@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { PlayerStateService } from './player-state.service';
@@ -14,13 +14,30 @@ export class PlayerService {
   private apiUrl = environment.apiUrl;
   private playerStateService = inject(PlayerStateService);
 
-  getAllPlayers(page: number): Observable<PlayersResponse | null> {
+  getAllPlayers(page: number, filters: { club?: string; nationality?: string; age?: number; longName?: string }): Observable<PlayersResponse | null> {
     this.playerStateService.loadingState(); // define loading: true en el state
 
+    // Crea los parámetros de consulta
+    let params = new HttpParams().set('page', page.toString());
+
+    // Agrega los filtros solo si tienen valor
+    if (filters.club) {
+      params = params.set('club', filters.club);
+    }
+    if (filters.nationality) {
+      params = params.set('nationality', filters.nationality);
+    }
+    if (filters.age !== undefined) {
+      params = params.set('age', filters.age.toString());
+    }
+    if (filters.longName) {
+      params = params.set('longName', filters.longName);
+    }
+
     return of(null).pipe(
-      delay(1000), // Retardo de 1 segundo para simular demora y ver los spinner de carga
+      delay(1000), // simular demora y ver los spinner de carga
       switchMap(() => 
-        this.http.get<PlayersResponse>(`${this.apiUrl}/player?page=${page}`)
+        this.http.get<PlayersResponse>(`${this.apiUrl}/player`, { params })
       ),
       map((res) => {
         if (res.success) {
@@ -41,12 +58,11 @@ export class PlayerService {
       })
     );
   }
-
   getPlayerById(id: number): Observable<Player | null> {
     this.playerStateService.loadingState();
 
     return of(null).pipe(
-      delay(1000), // Retardo de 1 segundo
+      delay(1000),
       switchMap(() => 
         this.http.get<PlayerResponse>(`${this.apiUrl}/player/${id}`)
       ),
@@ -74,7 +90,7 @@ export class PlayerService {
     this.playerStateService.loadingState();
 
     return of(null).pipe(
-      delay(1000), // Retardo de 1 segundo
+      delay(1000),
       switchMap(() =>
         this.http.post<PlayerResponse>(`${this.apiUrl}/player`, player)
       ),
@@ -102,7 +118,7 @@ export class PlayerService {
     this.playerStateService.loadingState();
 
     return of(null).pipe(
-      delay(1000), // Retardo de 1 segundo
+      delay(1000),
       switchMap(() => 
         this.http.delete<PlayerResponse>(`${this.apiUrl}/player/${id}`)
       ),
