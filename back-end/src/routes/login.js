@@ -1,8 +1,16 @@
-const express = require("express");
-const router = express.Router();
-const { userController } = require("../controllers");
+const express = require('express');
+const { authenticateUser } = require('../providers/authProvider');
 
-/* router.get("/", playerController.getAllPlayers);
-router.put("/:id", playerController.updatePlayer); */
+const router = express.Router();
+
+router.post('/', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const { token, user } = await authenticateUser(email, password);
+    res.status(200).json({ token, user });
+  } catch (error) {
+    res.status(401).json({ message: error.message });
+  }
+});
 
 module.exports = router;
