@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: xacademy_challenge
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: xacademy_challenge
+    depends_on:
+      - mysql
+
+  frontend:
+    build:
+      context: ./front-end/ownFIFA
+      dockerfile: Dockerfile
+    ports:
+      - '4200:4200'
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+
