@@ -6,10 +6,33 @@
     <div class="alert alert-danger" role="alert">
         {{ error() }}
     </div>
-
     }
+
+    <!-- Filtros -->
+    <div class="mb-3">
+        <h4>Filtrar Jugadores</h4>
+        <form (submit)="applyFilters($event)">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="filter.longName" name="longName" />
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" placeholder="Edad" [(ngModel)]="filter.age" name="age" />
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Club" [(ngModel)]="filter.club" name="club" />
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Nacionalidad" [(ngModel)]="filter.nationality" name="nationality" />
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     @if(!loading() && error() === null){
-    
         @for(player of players(); track player.id) {
             <div class="card">
                 <app-card-player
@@ -23,7 +46,7 @@
                 />
             </div>
         }
-    
+
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 @if(page > 1) {
