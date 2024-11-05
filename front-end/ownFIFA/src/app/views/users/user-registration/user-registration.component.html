@@ -1,15 +1,15 @@
 <div class="container mt-4">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div><h2>Registrar usuario</h2></div>
         <hr class="my-4">
-        <div><span>Los campos marcados con (*) son obligatorios</span></div>
 
         <div class="form-group mb-3">
-            <label for="firstName">Nombre: *</label>
+            <label for="firstName">Nombre:</label>
             <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
         </div>
 
         <div class="form-group mb-3">
-            <label for="lastName">Apellido: *</label>
+            <label for="lastName">Apellido:</label>
             <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
         </div>
 
