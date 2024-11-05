@@ -1,5 +1,5 @@
-const { passportConfig } = require("../util");
+const passportConfig = require("../util/passportConfig");
 
-const authMiddleware = passportConfig.authenticate("jwt", { session: false });
+const authMdw = passportConfig.authenticate("jwt", { session: false });
 
-module.exports = authMiddleware;
+module.exports = authMdw;

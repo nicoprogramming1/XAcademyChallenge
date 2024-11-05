@@ -21,6 +21,7 @@ const strategy = new Strategy(options, async (jwtPayload, done) => {
   }
 });
 
+// registra la estrategia
 passport.use(strategy);
 
 module.exports = passport;

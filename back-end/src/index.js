@@ -1,5 +1,5 @@
-// Requiere la configuración de entorno
 require("dotenv").config({ path: "./environments/environment.env" });
+
 // Importa el modelo User para que Sequelize lo sincronice
 const User = require("./models/User");
 
@@ -35,7 +35,7 @@ app.use(
 
 // ROUTES
 app.use("/player", authMdw ,playerRouter);
-/* app.use("/user", loginRouter); */
+app.use("/login", loginRouter);
 
 // Static files
 app.use("/static", express.static(path.join(__dirname, "static")));

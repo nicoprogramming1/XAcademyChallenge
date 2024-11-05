@@ -27,15 +27,18 @@ User.init(
       validate: {
         isEmail: true,
       },
+      field: 'email'
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      field: 'password'
     },
     role: {
       type: DataTypes.ENUM("Administrador", "Invitado"),
       allowNull: false,
       defaultValue: "Invitado",
+      field: 'role'
     },
   },
   {
