@@ -12,6 +12,24 @@ export class UserService {
   private http = inject(HttpClient)
   private apiUrl = environment.apiUrl
 
+  login(payload: { email: string; password: string }): Observable<UserResponse | null> {
+    return this.http.post<UserResponse>(`${this.apiUrl}/login`, payload).pipe(
+      map((res) => {
+        if (res.success) {
+          console.log('Inicio de sesión exitoso: ', res.data);
+          return res; // trae el token y el user
+        } else {
+          throw new Error(res.message)
+        }
+      }),
+      catchError((err) => {
+        const errorMessage = err.message || 'Error en el inicio de sesión';
+        console.error(errorMessage);
+        return of(null);
+      })
+    );
+  }
+
   saveUser(user: User): Observable<User | null> {
     return this.http.post<UserResponse>(`${this.apiUrl}/user`, user).pipe(
       map((res) => {
