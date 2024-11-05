@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PlayerService } from '../../../services/player.service';
-import { PlayerStateService } from '../../../services/player-state.service';
+import { PlayerService } from '../../../../services/player.service';
+import { PlayerStateService } from '../../../../services/player-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Player } from '../../../interfaces/player.interface';
+import { Player } from '../../../../interfaces/player.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
 Chart.register(...registerables);
 

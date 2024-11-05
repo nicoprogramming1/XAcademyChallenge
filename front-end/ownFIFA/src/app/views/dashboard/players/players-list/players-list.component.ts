@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PlayerService } from '../../../services/player.service';
-import { PlayerStateService } from '../../../services/player-state.service';
-import { CardPlayerComponent } from '../../../shared/card-player/card-player.component';
-import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
+import { PlayerService } from '../../../../services/player.service';
+import { PlayerStateService } from '../../../../services/player-state.service';
+import { CardPlayerComponent } from '../../../../shared/card-player/card-player.component';
+import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
