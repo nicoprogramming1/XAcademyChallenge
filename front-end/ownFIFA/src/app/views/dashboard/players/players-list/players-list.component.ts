@@ -5,6 +5,7 @@ import { PlayerStateService } from '../../../../services/player-state.service';
 import { CardPlayerComponent } from '../../../../shared/card-player/card-player.component';
 import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule } from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-players-list',
@@ -16,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   templateUrl: './players-list.component.html',
-  styleUrl: './players-list.component.scss',
+  styleUrls: ['./players-list.component.scss'],
 })
 export class PlayersListComponent {
   private playerService = inject(PlayerService);
@@ -37,13 +38,12 @@ export class PlayersListComponent {
   };
 
   ngOnInit(): void {
-    setTimeout(() => {  // simular retardo de api
+    setTimeout(() => {
       this.loadPlayers(this.page);
     }, 3000);
   }
 
   loadPlayers(page: number) {
-    // actualiza el state lista de jugadores para la page actual
     console.log("loadPlayers page: ", page);
     this.playerService.getAllPlayers(page, this.filter).subscribe({
       next: (res) => {
@@ -58,7 +58,14 @@ export class PlayersListComponent {
   }
 
   applyFilters(event: Event) {
-    event.preventDefault(); // Evitar el comportamiento predeterminado del formulario
-    this.loadPlayers(1); // Reiniciar a la primera página al aplicar filtros
+    event.preventDefault();
+    this.loadPlayers(1);
+  }
+
+  exportToCSV() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.players());
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Jugadores');
+    XLSX.writeFile(wb, 'jugadores_filtrados.csv');
   }
 }

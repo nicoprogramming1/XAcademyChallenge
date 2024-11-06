@@ -8,7 +8,6 @@
     </div>
     }
 
-    <!-- Filtros -->
     <div class="mb-3">
         <h4>Filtrar Jugadores</h4>
         <form (submit)="applyFilters($event)">
@@ -27,6 +26,7 @@
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                    <button (click)="exportToCSV()" class="btn btn-success">Descargar CSV</button>
                 </div>
             </div>
         </form>

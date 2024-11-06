@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -40,11 +45,12 @@ export class LoginComponent {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password,
       };
-  
+
       this.userService.login(payload).subscribe({
         next: (res) => {
           if (res) {
             localStorage.setItem('token', res.token!); // guarda el token en localStorage
+
             this.router.navigate(['/dashboard']); // redirige al dashboard
             this.successMessage = 'Inicio de sesión exitoso';
             this.errorMessage = null;
@@ -58,5 +64,4 @@ export class LoginComponent {
       });
     }
   }
-  
 }
