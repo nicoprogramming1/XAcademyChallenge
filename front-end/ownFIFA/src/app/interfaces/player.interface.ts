@@ -58,9 +58,16 @@ export enum BodyType {
 }
 
 export enum FifaVersion {
-  TWENTYTWO = '22',
-  TWENTYTHREE = '23',
   TWENTYFOUR = '24',
+  TWENTYTHREE = '23',
+  TWENTYTWO = '22',
+  TWENTYONE = '21',
+  TWENTY = '20',
+  NINETEEN = '19',
+  EIGHTEEN = '18',
+  SEVENTEEN = '17',
+  SIXTEEN = '16',
+  FIFTEEN = '15',
 }
 
 export enum FifaUpdate {
