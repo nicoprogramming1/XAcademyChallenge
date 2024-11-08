@@ -8,7 +8,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const { headerMdw, authMdw } = require("./middleware");
-const { playerRouter, loginRouter, userRouter } = require("./routes");
+const { playerRouter, loginRouter, userRouter, csvDataRouter } = require("./routes");
 const sequelize = require("./config/database");
 const passport = require("./util/passportConfig")
 
@@ -22,7 +22,7 @@ app.set("port", process.env.PORT || 3000);
 app.set("case sensitive routing", true);
 
 // MIDDLEWARES
-app.use(headerMdw);
+/* app.use(headerMdw); */
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
@@ -37,6 +37,7 @@ app.use(
 app.use("/player", authMdw, playerRouter);
 app.use("/login", loginRouter);
 app.use("/user", authMdw, userRouter);
+app.use("/csvdata", authMdw, csvDataRouter);
 
 // Static files
 app.use("/static", express.static(path.join(__dirname, "static")));
