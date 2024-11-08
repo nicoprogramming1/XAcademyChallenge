@@ -5,13 +5,16 @@
 
         <div class="form-group mb-3">
             <label for="longName">Nombre y apellido: *</label>
-            <input type="text" class="form-control" id="longName" formControlName="longName" required>
+            <input type="text-danger" class="form-control" id="longName" formControlName="longName">
+            <div class="text-danger">{{showNameErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="age">Edad: *</label>
-            <input type="number" class="form-control" id="age" formControlName="age" required>
+            <input type="number" class="form-control" id="age" formControlName="age">
+            <div class="text-danger">{{showAgeErrors()}}</div>
         </div>
+                
 
         <div formArrayName="playerPositions" class="mb-3">
             <h5>Posiciones: *</h5>
@@ -19,27 +22,29 @@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" [value]="position" (change)="onCheckboxChange($event)">
                 <label class="form-check-label">{{ position }}</label>
+                <div class="text-danger">{{showPlayerPositionsErrors()}}</div>
             </div>
             }
         </div>
 
         <div class="form-group mb-3">
             <label for="playerFaceUrl">Rostro: *</label>
-            <select class="form-select" id="playerFaceUrl" formControlName="playerFaceUrl" required>
+            <select class="form-select" id="playerFaceUrl" formControlName="playerFaceUrl">
                 @for(face of playerFaceUrl; track face) {
                 <option [value]="face">{{ face }}</option>
                 }
             </select>
+            <div class="text-danger">{{showPlayerFaceUrlErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="clubName">Club:</label>
-            <input type="text" class="form-control" id="clubName" formControlName="clubName">
+            <input type="text-danger" class="form-control" id="clubName" formControlName="clubName">
         </div>
 
         <div class="form-group mb-3">
             <label for="nationalityName">Nacionalidad:</label>
-            <input type="text" class="form-control" id="nationalityName" formControlName="nationalityName">
+            <input type="text-danger" class="form-control" id="nationalityName" formControlName="nationalityName">
         </div>
 
         <div class="form-group mb-3">
@@ -63,30 +68,35 @@
         <div class="form-group mb-3">
             <label for="heightCm">Altura (cm):</label>
             <input type="number" class="form-control" id="heightCm" formControlName="heightCm">
+            <div class="text-danger">{{showHeightCmErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="weightKg">Peso (kg):</label>
             <input type="number" class="form-control" id="weightKg" formControlName="weightKg">
+            <div class="text-danger">{{showWeightKgErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="potential">Potencial: *</label>
-            <input type="number" class="form-control" id="potential" formControlName="potential" required>
+            <input type="number" class="form-control" id="potential" formControlName="potential">
+            <div class="text-danger">{{showPotentialErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="overall">Nivel de skill general: *</label>
-            <input type="number" class="form-control" id="overall" formControlName="overall" required>
+            <input type="number" class="form-control" id="overall" formControlName="overall">
+            <div class="text-danger">{{showOverallErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="fifaUpdate">FIFA Update: *</label>
-            <select class="form-select" id="fifaUpdate" formControlName="fifaUpdate" required>
+            <select class="form-select" id="fifaUpdate" formControlName="fifaUpdate">
                 @for(fifaUpdate of fifaUpdate; track fifaUpdate) {
                 <option [value]="fifaUpdate">{{ fifaUpdate }}</option>
                 }
             </select>
+            <div class="text-danger">{{showFifaUpdateErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
@@ -96,21 +106,25 @@
                 <option [value]="fifaVersion">{{ fifaVersion }}</option>
                 }
             </select>
+            <div class="text-danger">{{showFifaVersionErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="passing">Pase: *</label>
-            <input type="number" class="form-control" id="passing" formControlName="passing" required>
+            <input type="number" class="form-control" id="passing" formControlName="passing">
+            <div class="text-danger">{{showPassingErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="dribbling">Regateo: *</label>
-            <input type="number" class="form-control" id="dribbling" formControlName="dribbling" required>
+            <input type="number" class="form-control" id="dribbling" formControlName="dribbling">
+            <div class="text-danger">{{showDribblingErrors()}}</div>
         </div>
 
         <div class="form-group mb-3">
             <label for="shooting">Disparo: *</label>
-            <input type="number" class="form-control" id="shooting" formControlName="shooting" required>
+            <input type="number" class="form-control" id="shooting" formControlName="shooting">
+            <div class="text-danger">{{showShootingErrors()}}</div>
         </div>
 
         <div class="d-flex gap-2">
@@ -125,7 +139,7 @@
         </div>
         <div>
             @if(invalidForm) {
-                <span class="text-danger">Hay campos obligatorios que deben ser completados!</span>
+                <span class="text-danger-danger">Hay campos obligatorios que deben ser completados!</span>
             }
         </div>
     </form>
