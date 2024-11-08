@@ -7,6 +7,8 @@ import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/load
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Player } from '../../../../interfaces/player.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
+import { LoadingErrorComponent } from "../../../../shared/loading-error/loading-error.component";
+import { TitleH1Component } from "../../../../shared/title-h1/title-h1.component";
 Chart.register(...registerables);
 
 @Component({
@@ -17,7 +19,9 @@ Chart.register(...registerables);
     LoadingSpinnerComponent,
     ReactiveFormsModule,
     FormsModule,
-  ],
+    LoadingErrorComponent,
+    TitleH1Component
+],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
@@ -36,6 +40,7 @@ export class PlayerComponent {
   public editMode!: boolean;
   public editablePlayer: Partial<Player> | null = null; // copia parcial editable de player
   public skillsChart!: Chart;
+  public title: string = "Registrar jugador"
   
   ngOnInit(): void {
     this.editMode = false;

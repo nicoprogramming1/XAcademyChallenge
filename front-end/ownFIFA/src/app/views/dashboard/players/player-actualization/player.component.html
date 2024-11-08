@@ -1,12 +1,11 @@
 <div class="container my-4">
-  <!-- Mostrar el spinner si loading es true -->
-  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+  <!-- muestra el loading-spinner si loading: true -->
+  <app-loading-spinner [loading]="loading()" />
 
-  @if(error()) {
-    <div class="alert alert-danger" role="alert">
-      {{ error() }}
-    </div>
-  }
+  <!-- muestra el loading-error si error: true -->
+  <app-loading-error [error]="error()" />
+
+  <app-title-h1 [title]="title" />
 
   @if(player()) {
 
