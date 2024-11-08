@@ -25,3 +25,8 @@ export interface PlayerResponse {
     data: User,
     token?: string;
   }
+
+  export interface CsvUploadResponse {
+    success: boolean,
+    message: string
+  }
