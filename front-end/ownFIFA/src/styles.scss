@@ -1,6 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 html, body { height: 100%; }
-body { box-sizing: border-box; margin: 0; font-family: "Helvetica", "Helvetica Neue", sans-serif; }
+body { box-sizing: border-box; margin: 0; font-family: "montserrat", "Helvetica", "Helvetica Neue", sans-serif; font-weight: 400; }
+
+// defino tipografia regular
+@font-face {
+    font-family: montserrat;
+    src: url("../public/fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+
+// defino tipografia bold
+@font-face {
+    font-family: montserrat;
+    src: url("../public/fonts/Montserrat-ExtraBold.ttf") format("truetype");
+    font-weight: 700;
+}
+
+// defino tipografia light
+@font-face {
+    font-family: montserrat;
+    src: url("../public/fonts/Montserrat-ExtraLight.ttf") format("truetype");
+    font-weight: 100;
+}
