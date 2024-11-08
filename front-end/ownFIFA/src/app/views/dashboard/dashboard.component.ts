@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidemenuComponent } from '../../shared/sidemenu/sidemenu.component';
-import { LogoutComponent } from '../login/logout/logout.component';
+import { LogoutComponent } from '../users/login/logout/logout.component';
 
 @Component({
   selector: 'app-dashboard',
