@@ -6,6 +6,8 @@ import { CardPlayerComponent } from '../../../../shared/card-player/card-player.
 import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
+import { LoadingErrorComponent } from '../../../../shared/loading-error/loading-error.component';
+import { TitleH1Component } from "../../../../shared/title-h1/title-h1.component";
 
 @Component({
   selector: 'app-players-list',
@@ -14,8 +16,10 @@ import * as XLSX from 'xlsx';
     CommonModule,
     CardPlayerComponent,
     LoadingSpinnerComponent,
-    FormsModule
-  ],
+    FormsModule,
+    LoadingErrorComponent,
+    TitleH1Component
+],
   templateUrl: './players-list.component.html',
   styleUrls: ['./players-list.component.scss'],
 })
@@ -29,6 +33,7 @@ export class PlayersListComponent {
   public players = this.playerStateService.players;
 
   public page: number = 1;
+  public title: string = "Listado de jugadores"
 
   public filter = {
     club: '',

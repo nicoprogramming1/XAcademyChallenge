@@ -1,19 +1,19 @@
 <div class="content">
-    <!-- muestra el loading spinner si loading: true -->
-    <app-loading-spinner/>
+    <!-- muestra el loading-spinner si loading: true -->
+    <app-loading-spinner [loading]="loading()" />
 
-    @if(error()) {
-    <div class="alert alert-danger" role="alert">
-        {{ error() }}
-    </div>
-    }
+    <!-- muestra el loading-error si error: true -->
+    <app-loading-error [error]="error()" />
+
+    <app-title-h1 [title]="title" />
 
     <div class="mb-3">
-        <h4>Filtrar Jugadores</h4>
+        <h2>Filtrar Jugadores</h2>
         <form (submit)="applyFilters($event)">
             <div class="row">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="filter.longName" name="longName" />
+                    <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="filter.longName"
+                        name="longName" />
                 </div>
                 <div class="col">
                     <input type="number" class="form-control" placeholder="Edad" [(ngModel)]="filter.age" name="age" />
@@ -22,7 +22,8 @@
                     <input type="text" class="form-control" placeholder="Club" [(ngModel)]="filter.club" name="club" />
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Nacionalidad" [(ngModel)]="filter.nationality" name="nationality" />
+                    <input type="text" class="form-control" placeholder="Nacionalidad" [(ngModel)]="filter.nationality"
+                        name="nationality" />
                 </div>
                 <div class="col">
                     <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
@@ -33,30 +34,24 @@
     </div>
 
     @if(!loading() && error() === null){
-        @for(player of players(); track player.id) {
-            <div class="card">
-                <app-card-player
-                    [id]="player.id"
-                    [playerFaceUrl]="player.playerFaceUrl"
-                    [longName]="player.longName"
-                    [age]="player.age"
-                    [nationalityName]="player.nationalityName"
-                    [overall]="player.overall"
-                    [clubName]="player.clubName"
-                />
-            </div>
-        }
+    @for(player of players(); track player.id) {
+    <div class="card">
+        <app-card-player [id]="player.id" [playerFaceUrl]="player.playerFaceUrl" [longName]="player.longName"
+            [age]="player.age" [nationalityName]="player.nationalityName" [overall]="player.overall"
+            [clubName]="player.clubName" />
+    </div>
+    }
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                @if(page > 1) {
-                    <li class="page-item"><a class="page-link" (click)="loadPlayers(page - 1)">Anterior</a></li>
-                    <li class="page-item"><a class="page-link" (click)="loadPlayers(page - 1)">{{ page - 1 }}</a></li>
-                }
-                <li class="page-item"><a class="page-link" (click)="loadPlayers(page)">{{ page }}</a></li>
-                <li class="page-item"><a class="page-link" (click)="loadPlayers(page + 1)">{{ page + 1 }}</a></li>
-                <li class="page-item"><a class="page-link" (click)="loadPlayers(page + 1)">Siguiente</a></li>
-            </ul>
-        </nav>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @if(page > 1) {
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page - 1)">Anterior</a></li>
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page - 1)">{{ page - 1 }}</a></li>
+            }
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page)">{{ page }}</a></li>
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page + 1)">{{ page + 1 }}</a></li>
+            <li class="page-item"><a class="page-link" (click)="loadPlayers(page + 1)">Siguiente</a></li>
+        </ul>
+    </nav>
     }
 </div>
