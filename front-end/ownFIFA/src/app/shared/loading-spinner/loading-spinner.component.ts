@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { PlayerStateService } from '../../services/player-state.service';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,7 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './loading-spinner.component.scss'
 })
 export class LoadingSpinnerComponent {
-  private playerStateService = inject(PlayerStateService)
-
-  public loading = this.playerStateService.loading; 
+  @Input() loading!: boolean | null
 }
