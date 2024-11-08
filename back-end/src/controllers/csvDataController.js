@@ -1,8 +1,10 @@
 const csvDataService = require("../services/csvDataService");
 
 exports.uploadCSV = async (req, res) => {
+  const file = req.file
+  console.log("Desde el controller csv, file: ", file)
   try {
-    if (!req.file) {
+    if (!file) {
       // verificar que el archivo fue subido correctamente
       return res.status(400).json({
         success: false,
@@ -10,7 +12,7 @@ exports.uploadCSV = async (req, res) => {
       });
     }
 
-    await csvDataService.processCSV(req.file.path);
+    await csvDataService.processCSV(file.path);
     res.status(200).json({
       success: true,
       message: "Datos del CSV importados exitosamente",

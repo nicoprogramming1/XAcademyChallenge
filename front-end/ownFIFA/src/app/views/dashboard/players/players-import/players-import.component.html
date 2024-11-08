@@ -1,1 +1,20 @@
-<p>players-import works!</p>
+<form>
+  <div class="form-group">
+    <label for="csvFile">Choose CSV File</label>
+    <input type="file" id="csvFile" (change)="onFileSelect($event)" class="form-control" required />
+  </div>
+
+  <!-- Mensaje de error -->
+  @if(errorMessage){
+    <div class="text-danger mt-2">{{ errorMessage }}</div>
+  }
+
+  <!-- Mensaje de éxito -->
+  @if(successMessage) {
+    <div class="text-success mt-2">{{ successMessage }}</div>
+  }
+
+  <button type="button" class="btn btn-primary mt-3" (click)="onUpload($event)" [disabled]="!file">
+    Upload
+  </button>
+</form>
