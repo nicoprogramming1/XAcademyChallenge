@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({
+const uploadCSVMdw = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (file.mimetype === 'text/csv') {
@@ -20,3 +20,5 @@ const upload = multer({
     }
   }
 });
+
+module.exports = uploadCSVMdw;
