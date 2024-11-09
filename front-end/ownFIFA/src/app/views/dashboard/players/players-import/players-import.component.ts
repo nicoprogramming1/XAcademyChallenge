@@ -27,13 +27,12 @@ export class PlayersImportComponent {
     if (input.files?.length) {
       const selectedFile = input.files[0];
 
-      // Validar si es un archivo CSV
       if (selectedFile.type === 'text/csv') {
         this.file = selectedFile;
-        this.errorMessage = null;  // Limpiar mensaje de error
+        this.errorMessage = null;
       } else {
         this.errorMessage = 'Por favor, seleccione un archivo CSV válido.';
-        this.file = null;  // Resetear el archivo
+        this.file = null;  // resetear el archivo
       }
     } else {
       this.errorMessage = 'No se ha seleccionado ningún archivo.';
@@ -41,7 +40,7 @@ export class PlayersImportComponent {
   }
 
   onUpload(event: MouseEvent): void {
-    event.preventDefault();  // Evitar la recarga del formulario
+    event.preventDefault();  // evitar la recarga del formulario
   
     if (!this.file) {
       this.errorMessage = 'Debe seleccionar un archivo CSV antes de continuar.';
@@ -53,12 +52,12 @@ export class PlayersImportComponent {
     this.csvService.uploadCsv(this.file).subscribe({
       next: (response) => {
         this.successMessage = 'Archivo cargado exitosamente.';
-        this.errorMessage = null;  // Limpiar mensaje de error
+        this.errorMessage = null;
         console.log('Archivo cargado exitosamente:', response);
       },
       error: (error) => {
         this.errorMessage = `Error al cargar el archivo: ${error.message || error}`;
-        this.successMessage = null;  // Limpiar mensaje de éxito
+        this.successMessage = null;
         console.error('Error al cargar el archivo:', error);
       },
     });

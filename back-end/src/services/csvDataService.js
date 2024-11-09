@@ -1,9 +1,10 @@
-// services/csvDataService.js
-const fs = require("fs");
+const path = require("path")
 const csv = require("csv-parser");
+const fs = require("fs");
+const { parse } = require('json2csv');
 const Player = require("../models/Player");
 
-exports.processCSV = (filePath) => {
+exports.importCSV = (filePath) => {
   return new Promise((resolve, reject) => {
     const players = [];
 
@@ -45,4 +46,25 @@ exports.processCSV = (filePath) => {
         reject(new Error("Error al leer el archivo CSV"));
       });
   });
+};
+
+exports.exportCSV = async () => {
+  try {
+    const players = await Player.findAll(); // Obtiene todos los jugadores de la base de datos
+
+    if (!players || players.length === 0) {
+      throw new Error('No hay jugadores para exportar.');
+    }
+
+    // Convertimos los jugadores a formato CSV
+    const csvData = parse(players.map(player => player.toJSON()));
+
+    const filePath = path.join(__dirname, '../files/exports', `database_export_${Date.now()}.csv`);
+    fs.writeFileSync(filePath, csvData); // Guardamos el archivo CSV en disco
+
+    return filePath; // Retornamos la ruta del archivo
+  } catch (error) {
+    console.error("Error al generar el archivo CSV:", error);
+    throw new Error('No se pudo generar el archivo CSV.');
+  }
 };

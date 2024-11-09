@@ -37,6 +37,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'players-export',
+        loadComponent: () =>
+          import('./views/dashboard/players/players-export/players-export.component').then(
+            (m) => m.PlayersExportComponent
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
