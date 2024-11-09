@@ -1,14 +1,18 @@
-# XAcademyChallenge
+## XAcademyChallenge
 Author: Wnorowsky Nicolás
 
+# INTRODUCCIÓN
+
+Este proyecto es parte del Challenge del XAcademy de Santex Group con motivo de evaluar lo aprendido en el BootCamp a lo largo de los últimos meses. Aprobar remite a participar de la fase de proyectos de la academia en una instancia de simulación laboral en pos de desarrollar software para un cliente ficticio y servir como experiencia a sus participantes.
+Se decide abordar el Challenge como un pedido formal de un cliente para el desarrollo de un sistema de gestión e-sport de jugadores de FIFA.
 
 # "OWNFIFA" PROJECT
 
 Un reconocido player de e-sports nos solicita una web donde poder gestionar de forma sencilla los jugadores de su base de datos personal.
 Su interés radica particularmente en la posibilidad de visualizar el total de jugadores existentes, encontrar un jugador determinado de una forma sencilla e intuitiva, modificar sus atributos, eliminarlo y poder crear nuevos jugadores customizados e incluso conocer su skill progression a lo largo de los años.
 Para ello, nos provee la base de datos con la que compite en torneos de forma oficial, siendo esta una colección de jugadores de ambos sexos en un período que va desde el 2015 al 2023.
-Nos comunica además que quisiera contar con un login para limitar el acceso y la posibilidad de agregar a sus colegas y conocidos para permitir su ingreso de forma restrictiva a sólo funcionalidades que muestren información sin posibilidad de alterarla.
-Por último, nos comenta que sería oportuno para él poder compartir la base de datos o importar nuevos datos a la misma.
+Nos comunica además que quisiera contar con un login para limitar el acceso y la posibilidad de agregar a sus colegas y conocidos para permitir su ingreso de forma restrictiva a sólo funcionalidades que muestren información no sensible sin posibilidad de alterarla.
+Por último, nos comenta que sería oportuno para él poder compartir la base de datos o importar nuevos datos a la misma para integrarla a su perfil en el juego. Los invitados tendrían solamente la posibilidad de descargar los datos de los jugadores.
 
 
 # PROPUESTA
@@ -22,14 +26,14 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 
 ### Requerimientos funcionales
 
-// Actualizar incluye la modificación, consulta y eliminación
-// Para los fines de práctica este proyecto, se obviará la consulta, modificación y baja de usuarios planteando sólo la posiblidad del registro
+* Actualizar incluye la modificación, consulta y eliminación
+- Para los fines de práctica este proyecto, se obviará la consulta, modificación y baja de usuarios planteando sólo la posiblidad del registro del "Invitado"
 
 
 | **Requerimiento Global (RG)**      | **Requerimiento Detallado (RD)**                                                      |
 |:-----------------------------------|:--------------------------------------------------------------------------------------|
 | **Gestión de jugadores**            | Registrar jugador                                                                     |
-|                                     | Actualizar jugador                                                                     |
+|                                     | Actualizar jugador *                                                                     |
 |                                     | Emitir lista de jugadores                                                             |
 |                                     | Generar estadística de progreso de jugador                                             |
 | **Gestión de seguridad**            | Iniciar sesión                                                                         |
@@ -53,10 +57,10 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 
 ### Roles de usuario
 
-// A fines de simplificarlo, ya que no es un requisito directo de esta tarea el rol del cliente será *Administrador*
+| A fines de simplificarlo, ya que no es un requisito directo de esta tarea el rol del cliente será *Administrador* |
 
 - Administrador: el cliente tendrá acceso total a las funcionalidades y vistas del sistema
-- Invitado: su acceso es restringido a interfaces de sólo lectura de datos, sin posibilidad de alteración
+- Invitado: su acceso es restringido a interfaces de sólo lectura de datos y descarga, sin posibilidad de alteración
 
 
 ## Épicas e Historias de Usuario (HU)
@@ -78,13 +82,25 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 | Gestión de datos                    | EP003     | Administrador | Media     | Como administrador, quiero poder gestionar la importación, exportación y compartición de los datos del sistema.            |                         |
 | Importar base de datos externa      | HU011     | Administrador | Media      | Como administrador, quiero poder importar una base de datos externa para cargar información masiva al sistema.             | Los datos deben ser importados correctamente y reflejados en el sistema sin errores. El archivo debe tener un formato CSV, de lo contrario mostrar un mensaje al usuario. |
 | Exportar base de datos de jugadores             | HU012     | Administrador | Baja      | Como administrador, quiero poder exportar la base de datos de jugadores para utilzar sus datos de forma externa. | La base de datos de jugadores debe exportarse en el formato adecuado (csv) y sin pérdida de información. |
-| Compartir lista de jugadores filtrada  | HU013     | Administrador | Media     | Como administrador, quiero poder compartir la información de la lista filtrada de jugadores de la "HU005 Listar jugadores" en formato CSV para poder compartirla fácilmente. | El archivo CSV debe generarse con los datos correctos y descargarse sin errores. |
+| Compartir lista de jugadores filtrada  | HU013     | Administrador | Media     | Como usuario, quiero poder compartir la información de la lista filtrada de jugadores para poder compartirla fácilmente. | El archivo CSV debe generarse según los datos filtrados de los jugadores y descargarse sin errores. Esta funcionalidad es parte de la vista de la "HU005 Listar jugadores". |
 
 
+# DECISIONES TÉCNICAS
+En este apartado solo se nombran algunas de las decisiones tomadas en el desarrollo del sistema, para mayor información se ha hecho uso constante de commits que proveen un registro rico del progreso diario y las actualizaciones implementadas.
 
-
-
-
+- Se decide trabajar con una branch principal de desarrollo (develop-main) y a partir de esta cada feature en una nueva
+- Usar Multer para gestionar la importación de jugadores mediante csv a database-
+- La tabla players dada por los mentores no sufrirá alteraciones en su estructura y sólo se usarán ciertos campos de la misma, por ende la tabla no esta normalizada
+- Se crea una tabla users para la gestión de usuarios
+- La seguridad es implementada mediante JWT y Passport
+- Se crea una carpeta Files tanto para los uploads (importaciones a db) como para las descargas (export)
+- El usuario con rol Invitado solo puede consultar jugador, listarlos, filtrarlos y descargarlos
+- Se decide solo implementar el registro de un usuario y no su modificación, consulta y eliminación
+- Se decide documentar con Swagger
+- El análisis funcional será mínimo ya que no es un requisito y además no tener la tabla players normalizada deja los diagramas UML muy pobres y desconexos (clases de diseño, modelo de base de datos relaciones, modelo del dominio del problema, etc). Además conlleva mucho tiempo!
+- Se decide usar xlsx para gestionar datos excel
+- Se decide usar json2csv para gestionar los export csv
+- Se usa sequelize como ORM para procesar operaciones sql y de modelo de datos
 
 
 
