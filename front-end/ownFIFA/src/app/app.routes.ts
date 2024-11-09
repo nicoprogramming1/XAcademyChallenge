@@ -30,6 +30,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'players-import',
+        loadComponent: () =>
+          import('./views/dashboard/players/players-import/players-import.component').then(
+            (m) => m.PlayersImportComponent
+          ),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
@@ -46,7 +53,7 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./views/login/login/login.component').then(
+      import('./views/users/login/login/login.component').then(
         (m) => m.LoginComponent
       ),
   },
