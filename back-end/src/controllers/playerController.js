@@ -21,6 +21,13 @@ exports.getAllPlayers = [
         age,
         longName,
       });
+      if (result.players.length === 0) { // verifica si hay jugadores
+        return res.status(404).json({
+          success: false,
+          message: "No existen jugadores",
+          data: null,
+        });
+      }
       res.status(200).json({
         success: true,
         message: "Jugadores obtenidos exitosamente",
