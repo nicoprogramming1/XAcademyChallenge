@@ -29,7 +29,7 @@ const fileFilter = (req, file, cb) => {
 const uploadCSVMdw = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 1024 * 1024 * 5 } // limitar el tamaño del archivo a 5 mb
+  limits: { fileSize: 1024 * 1024 * 100 } // limitar el tamaño del archivo a 100 mb
 });
 
 module.exports = uploadCSVMdw;
