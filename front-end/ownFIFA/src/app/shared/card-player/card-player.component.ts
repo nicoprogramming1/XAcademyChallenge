@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './card-player.component.scss'
 })
 export class CardPlayerComponent {
-  @Input() playerFaceUrl!: string
+  @Input() playerFaceUrl!: string | null
   @Input() longName!: string
   @Input() age!: number
   @Input() nationalityName: string | undefined = "Desconocida"
