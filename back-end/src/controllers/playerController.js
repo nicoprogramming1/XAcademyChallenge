@@ -37,6 +37,47 @@ exports.getAllPlayers = [
   }
 ];
 
+exports.filterPlayersExport = [
+  playerValidationRules(),   // Reglas de validación
+  validatePlayer,             // Validación de los parámetros
+  async (req, res) => {
+    const { club, nationality, age, longName } = req.query;
+
+    try {
+      // Llamamos al servicio para obtener los jugadores filtrados
+      const players = await playerService.getFilteredPlayersForExport({
+        club,
+        nationality,
+        age: age ? parseInt(age) : undefined,
+        longName,
+      });
+
+      // Verificamos si hay jugadores
+      if (!players || players.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "No se encontraron jugadores para exportar.",
+          data: null,
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Jugadores filtrados obtenidos exitosamente para exportación.",
+        data: { players },
+      });
+    } catch (error) {
+      console.error("Error al obtener jugadores para exportación:", error);
+      res.status(500).json({
+        success: false,
+        message: "Error al obtener jugadores para exportación.",
+        data: null,
+      });
+    }
+  },
+];
+
+
 exports.getPlayerById = async (req, res) => {
   const id = req.params.id;
   console.log("El id en el controller es: ", id);

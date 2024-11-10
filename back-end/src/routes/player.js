@@ -4,6 +4,7 @@ const { playerController } = require("../controllers");
 
 // llamada a getAllPlayers: GET /player?page=1&limit=9
 router.get("/", playerController.getAllPlayers);
+router.get("/filterExport", playerController.filterPlayersExport);
 router.post("/", playerController.createPlayer);
 router.get("/:id", playerController.getPlayerById);
 router.delete("/:id", playerController.deletePlayer);

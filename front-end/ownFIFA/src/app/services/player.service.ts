@@ -3,8 +3,19 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { PlayerStateService } from './player-state.service';
 import { Player } from '../interfaces/player.interface';
-import { catchError, delay, finalize, map, Observable, of, switchMap } from 'rxjs';
-import { PlayerResponse, PlayersResponse } from '../interfaces/responses.interface';
+import {
+  catchError,
+  delay,
+  finalize,
+  map,
+  Observable,
+  of,
+  switchMap,
+} from 'rxjs';
+import {
+  PlayerResponse,
+  PlayersResponse,
+} from '../interfaces/responses.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,35 +25,31 @@ export class PlayerService {
   private apiUrl = environment.apiUrl;
   private playerStateService = inject(PlayerStateService);
 
-  getAllPlayers(page: number, filters: { club?: string; nationality?: string; age?: number; longName?: string }): Observable<PlayersResponse | null> {
+  getAllPlayers(
+    page: number,
+    filters: {
+      club?: string;
+      nationality?: string;
+      age?: number;
+      longName?: string;
+    }
+  ): Observable<PlayersResponse | null> {
     this.playerStateService.loadingState(); // define loading: true en el state
 
-    // Crea los parámetros de consulta
-    let params = new HttpParams().set('page', page.toString());
-
-    // Agrega los filtros solo si tienen valor
-    if (filters.club) {
-      params = params.set('club', filters.club);
-    }
-    if (filters.nationality) {
-      params = params.set('nationality', filters.nationality);
-    }
-    if (filters.age !== undefined) {
-      params = params.set('age', filters.age.toString());
-    }
-    if (filters.longName) {
-      params = params.set('longName', filters.longName);
-    }
+    let params = this.createFilterParams(filters).set('page', page.toString());
 
     return of(null).pipe(
       delay(1000), // simular demora y ver los spinner de carga
-      switchMap(() => 
+      switchMap(() =>
         this.http.get<PlayersResponse>(`${this.apiUrl}/player`, { params })
       ),
       map((res) => {
         if (res.success) {
-          this.playerStateService.loadAllPlayersState(res.data.players);  // carga los jugadores en el state para ponerlos a disposicion global
-          console.log('Desde el service, lista de jugadores: ', res.data.players);
+          this.playerStateService.loadAllPlayersState(res.data.players); // carga los jugadores en el state para ponerlos a disposicion global
+          console.log(
+            'Desde el service, lista de jugadores: ',
+            res.data.players
+          );
           return res;
         } else {
           throw new Error(res.message);
@@ -58,12 +65,49 @@ export class PlayerService {
       })
     );
   }
+
+  getFilteredPlayersForExport(filters: {
+    club?: string;
+    nationality?: string;
+    age?: number;
+    longName?: string;
+  }): Observable<PlayersResponse | null> {
+    this.playerStateService.loadingState(); // loading: true en el state
+  
+    const params = this.createFilterParams(filters);
+  
+    return of(null).pipe(
+      delay(1000), // simular demora y ver el spinner de carga
+      switchMap(() => 
+        this.http.get<PlayersResponse>(`${this.apiUrl}/player/filterExport`, { params })
+      ),
+      map((res) => {
+        if (res.success && res.data.players?.length) { // Verificamos que los datos existan y tengan al menos un elemento
+          console.log('Jugadores filtrados para exportar: ', res.data.players);
+          this.playerStateService.loadAllPlayersState(res.data.players); // carga los jugadores en el state para ponerlos a disposicion global
+          return res;
+        } else {
+          throw new Error('No se encontraron jugadores para exportar');
+        }
+      }),
+      catchError((err) => {
+        const errorMessage = err.message || 'Error al exportar los jugadores';
+        this.handleError(errorMessage);
+        return of(null);
+      }),
+      finalize(() => {
+        this.playerStateService.stopLoadingState(); // loading: false al state
+      })
+    );
+  }
+  
+
   getPlayerById(id: number): Observable<Player | null> {
     this.playerStateService.loadingState();
 
     return of(null).pipe(
       delay(1000),
-      switchMap(() => 
+      switchMap(() =>
         this.http.get<PlayerResponse>(`${this.apiUrl}/player/${id}`)
       ),
       map((res) => {
@@ -97,7 +141,10 @@ export class PlayerService {
       map((res) => {
         if (res.success) {
           this.playerStateService.savePlayerState(res.data);
-          console.log('Se ha creado con éxito el/la jugador/a ', res.data.longName);
+          console.log(
+            'Se ha creado con éxito el/la jugador/a ',
+            res.data.longName
+          );
           return res.data;
         } else {
           throw new Error(res.message);
@@ -119,7 +166,7 @@ export class PlayerService {
 
     return of(null).pipe(
       delay(1000),
-      switchMap(() => 
+      switchMap(() =>
         this.http.delete<PlayerResponse>(`${this.apiUrl}/player/${id}`)
       ),
       map((res) => {
@@ -131,7 +178,8 @@ export class PlayerService {
         }
       }),
       catchError((err) => {
-        const errorMessage = err.message || 'Error en la eliminación del jugador';
+        const errorMessage =
+          err.message || 'Error en la eliminación del jugador';
         this.handleError(errorMessage);
         return of(null);
       }),
@@ -141,31 +189,60 @@ export class PlayerService {
     );
   }
 
-  updatePlayer(id: number, playerData: Partial<Player>): Observable<Player | null> {
-    this.playerStateService.loadingState()
-    return this.http.put<PlayerResponse>(`${this.apiUrl}/player/${id}`, playerData).pipe(
-      map(res => {
-        if(res.success){
-          this.playerStateService.updatePlayerState(res.data)
-        return res.data
-        }
-        else {
-          throw new Error(res.message)
-        }
-      }),
-      catchError((err) => {
-        const errorMessage = err.message || 'Error en la eliminación del jugador';
-        this.handleError(errorMessage);
-        return of(null);
-      }),
-      finalize(() => {
-        this.playerStateService.stopLoadingState();
-      })
-    );
+  updatePlayer(
+    id: number,
+    playerData: Partial<Player>
+  ): Observable<Player | null> {
+    this.playerStateService.loadingState();
+    return this.http
+      .put<PlayerResponse>(`${this.apiUrl}/player/${id}`, playerData)
+      .pipe(
+        map((res) => {
+          if (res.success) {
+            this.playerStateService.updatePlayerState(res.data);
+            return res.data;
+          } else {
+            throw new Error(res.message);
+          }
+        }),
+        catchError((err) => {
+          const errorMessage =
+            err.message || 'Error en la eliminación del jugador';
+          this.handleError(errorMessage);
+          return of(null);
+        }),
+        finalize(() => {
+          this.playerStateService.stopLoadingState();
+        })
+      );
   }
 
   private handleError(err: string) {
-    this.playerStateService.errorState(err);  // carga el error en state
+    this.playerStateService.errorState(err); // carga el error en state
     console.error('Se ha producido un error (desde el handleError): ', err);
+  }
+
+  private createFilterParams(filters: {
+    club?: string;
+    nationality?: string;
+    age?: number;
+    longName?: string;
+  }): HttpParams {
+    let params = new HttpParams();
+
+    if (filters.club) {
+      params = params.set('club', filters.club);
+    }
+    if (filters.nationality) {
+      params = params.set('nationality', filters.nationality);
+    }
+    if (filters.age !== undefined) {
+      params = params.set('age', filters.age.toString());
+    }
+    if (filters.longName) {
+      params = params.set('longName', filters.longName);
+    }
+
+    return params;
   }
 }

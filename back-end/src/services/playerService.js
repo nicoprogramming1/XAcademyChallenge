@@ -42,6 +42,29 @@ exports.getAllPlayers = async (
   }
 };
 
+exports.getFilteredPlayersForExport = async ({ club, nationality, age, longName }) => {
+  const whereClause = {};
+
+  // Construcción del filtro de búsqueda
+  if (club) whereClause.club_name = club;
+  if (nationality) whereClause.nationality_name = nationality;
+  if (age) whereClause.age = age;
+  if (longName) whereClause.long_name = { [Op.like]: `%${longName}%` };
+
+  try {
+    // Realizamos la consulta en la base de datos
+    const players = await Player.findAll({
+      where: whereClause,
+    });
+
+    return players;
+  } catch (error) {
+    console.error("Error en playerService:", error);
+    throw new Error(`Error al recuperar jugadores: ${error.message}`);
+  }
+};
+
+
 
 exports.getPlayerById = async (id) => {
   try {

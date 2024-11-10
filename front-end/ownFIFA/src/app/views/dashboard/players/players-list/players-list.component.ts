@@ -68,9 +68,20 @@ export class PlayersListComponent {
   }
 
   exportToCSV() {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.players());
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Jugadores');
-    XLSX.writeFile(wb, 'jugadores_filtrados.csv');
+    this.playerService.getFilteredPlayersForExport(this.filter).subscribe({
+      next: (res) => {
+        console.log('Datos recibidos para exportar:', res); // Diagnóstico
+
+        if (res && res.data.players?.length) {
+          const worksheet = XLSX.utils.json_to_sheet(res.data.players);
+          const workbook = { Sheets: { 'Jugadores': worksheet }, SheetNames: ['Jugadores'] };
+          XLSX.writeFile(workbook, 'jugadores_filtrados.csv');
+        } else {
+          console.error('No hay jugadores para exportar');
+        }
+      },
+      error: (err) => console.error('Error al descargar CSV:', err),
+    });
   }
+  
 }
