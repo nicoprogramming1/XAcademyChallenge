@@ -26,7 +26,7 @@ Proporcionar una plataforma centralizada y segura para la gestión y visualizaci
 
 ### Requerimientos funcionales
 
-- * Actualizar incluye la modificación, consulta y eliminación
+- (*) Actualizar incluye la modificación, consulta y eliminación
 - Para los fines de práctica este proyecto, se obviará la consulta, modificación y baja de usuarios planteando sólo la posiblidad del registro del "Invitado"
 
 
@@ -98,7 +98,7 @@ En este apartado solo se nombran algunas de las decisiones tomadas en el desarro
 - Se decide solo implementar el registro de un usuario y no su modificación, consulta y eliminación
 - Se decide documentar con Swagger
 - El análisis funcional será mínimo ya que no es un requisito y además no tener la tabla players normalizada deja los diagramas UML muy pobres y desconexos (clases de diseño, modelo de base de datos relaciones, modelo del dominio del problema, etc). Además conlleva mucho tiempo!
-- Se decide usar xlsx para gestionar datos excel
+- Se decide usar xlsx para gestionar la lista filtrada csv
 - Se decide usar json2csv para gestionar los export csv
 - Se usa sequelize como ORM para procesar operaciones sql y de modelo de datos
 - Se usa express-validator y Reactive Forms para validaciones
