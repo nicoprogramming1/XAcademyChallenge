@@ -36,7 +36,7 @@
     @if(!loading() && error() === null){
     @for(player of players(); track player.id) {
     <div class="card">
-        <app-card-player [id]="player.id" [playerFaceUrl]="player.playerFaceUrl" [longName]="player.longName"
+        <app-card-player [id]="player.id" [playerFaceUrl]="player.playerFaceUrl!" [longName]="player.longName"
             [age]="player.age" [nationalityName]="player.nationalityName" [overall]="player.overall"
             [clubName]="player.clubName" />
     </div>
