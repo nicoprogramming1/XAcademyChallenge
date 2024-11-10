@@ -101,6 +101,7 @@ En este apartado solo se nombran algunas de las decisiones tomadas en el desarro
 - Se decide usar xlsx para gestionar datos excel
 - Se decide usar json2csv para gestionar los export csv
 - Se usa sequelize como ORM para procesar operaciones sql y de modelo de datos
+- Se usa express-validator y Reactive Forms para validaciones
 
 
 
