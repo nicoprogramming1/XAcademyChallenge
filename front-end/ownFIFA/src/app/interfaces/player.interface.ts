@@ -3,7 +3,7 @@ export interface Player {
   longName: string;
   age: number;
   playerPositions: string;
-  playerFaceUrl: string;
+  playerFaceUrl?: string;
   clubName?: string | undefined;
   nationalityName?: string | undefined;
   preferredFoot?: PreferredFoot;
