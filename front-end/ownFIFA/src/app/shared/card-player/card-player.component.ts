@@ -28,7 +28,7 @@ export class CardPlayerComponent {
 
   navigateToPlayer(id?: number) {
     if (id !== undefined) {
-      this.router.navigate(['dashboard/players', id]);
+      this.router.navigate(['/players', id]);
     }
   }
 
