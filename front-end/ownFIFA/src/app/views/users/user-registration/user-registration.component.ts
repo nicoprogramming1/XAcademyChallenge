@@ -9,11 +9,12 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { Role, User } from '../../../interfaces/user.interface';
+import { TitleH1Component } from '../../../shared/title-h1/title-h1.component';
 
 @Component({
   selector: 'app-user-registration',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TitleH1Component],
   templateUrl: './user-registration.component.html',
   styleUrl: './user-registration.component.scss',
 })
@@ -24,6 +25,8 @@ export class UserRegistrationComponent {
   public invalidForm: boolean = false;
   public registerForm!: FormGroup;
   public successMessage: string | null = null;
+
+  public title: string = "Registrar invitado"
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
