@@ -30,10 +30,10 @@ export class UserRegistrationComponent {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      firstName: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
 
@@ -72,5 +72,69 @@ export class UserRegistrationComponent {
   resetForm(): void {
     this.registerForm.reset();
     this.invalidForm = false;
+  }
+
+  showFirstNameErrors() {
+    const firstName = this.registerForm.get('firstName');
+
+    if (firstName?.touched && !firstName.valid) {
+      switch (true) {
+        case firstName.errors!['required']:
+          return 'El nombre es obligatorio';
+        case firstName.errors!['minLength']:
+          return 'El nombre debe tener al menos 3 caracteres';
+        default:
+          return null;
+      }
+    }
+    return null;
+  }
+
+  showLastNameErrors() {
+    const lastName = this.registerForm.get('lastName');
+
+    if (lastName?.touched && !lastName.valid) {
+      switch (true) {
+        case lastName.errors!['required']:
+          return 'El apellido es obligatoria';
+        case lastName.errors!['minLength']:
+          return 'El apellido debe tener al menos 3 caracteres';
+        default:
+          return null;
+      }
+    }
+    return null;
+  }
+
+  showEmailErrors() {
+    const email = this.registerForm.get('email');
+
+    if (email?.touched && !email.valid) {
+      switch (true) {
+        case email.errors!['required']:
+          return 'El Email es obligatoria';
+        case email.errors!['email']:
+          return 'Debe tener formato email';
+        default:
+          return null;
+      }
+    }
+    return null;
+  }
+
+  showPasswordErrors() {
+    const password = this.registerForm.get('password');
+
+    if (password?.touched && !password.valid) {
+      switch (true) {
+        case password.errors!['required']:
+          return 'La contraseña es obligatoria';
+        case password.errors!['minLength']:
+          return 'La contraseña debe tener al menos 6 caracteres';
+        default:
+          return null;
+      }
+    }
+    return null;
   }
 }
