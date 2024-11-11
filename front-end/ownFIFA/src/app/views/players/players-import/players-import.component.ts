@@ -5,17 +5,18 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CsvService } from '../../../services/csv.service';
+import { TitleH1Component } from '../../../shared/title-h1/title-h1.component';
 
 @Component({
   selector: 'app-players-import',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TitleH1Component],
   templateUrl: './players-import.component.html',
   styleUrl: './players-import.component.scss',
 })
 export class PlayersImportComponent {
   private csvService = inject(CsvService);
-  private fb = inject(FormBuilder);
+  public title: string = "Importar jugadores"
 
   public file: File | null = null;
   public errorMessage: string | null = null;

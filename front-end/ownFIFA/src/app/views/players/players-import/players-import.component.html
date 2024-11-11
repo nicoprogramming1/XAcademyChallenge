@@ -1,3 +1,4 @@
+<app-title-h1 [title]="title"></app-title-h1>
 <div class="container">
   <form>
     <div class="form-group">
@@ -5,16 +6,14 @@
       <input type="file" id="csvFile" (change)="onFileSelect($event)" class="form-control" required />
     </div>
   
-    <!-- Mensaje de error -->
     @if(errorMessage){
       <div class="text-danger mt-2">{{ errorMessage }}</div>
     }
-  
-    <!-- Mensaje de éxito -->
+
     @if(successMessage) {
       <div class="text-success mt-2">{{ successMessage }}</div>
     }
-  
+
     <button type="button" class="btn btn-primary mt-3" (click)="onUpload($event)" [disabled]="!file">
       Importar
     </button>
