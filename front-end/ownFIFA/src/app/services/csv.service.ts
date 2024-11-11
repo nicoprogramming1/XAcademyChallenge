@@ -52,11 +52,11 @@ export class CsvService {
 
   // crear la descarga del archivo
   downloadFile(blob: Blob, fileName: string): void {
-    const url = window.URL.createObjectURL(blob); // Crea la URL del archivo
-    const a = document.createElement('a');  // Crea un enlace para descargar el archivo
+    const url = window.URL.createObjectURL(blob); // crea la URL del file
+    const a = document.createElement('a');  // crea un enlace para descargar el archivo
     a.href = url;
-    a.download = fileName;  // Nombre del archivo
-    a.click();  // Dispara el evento de clic
-    window.URL.revokeObjectURL(url);  // Libera la URL creada
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 }

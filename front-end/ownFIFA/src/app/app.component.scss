@@ -1,37 +1,33 @@
-/* Estilos globales del wrapper */
 .wrapper {
   display: flex;
-  flex-direction: column; /* El header estará encima */
-  height: 100vh;  /* Ocupa todo el alto de la pantalla */
+  flex-direction: column;
+  height: 100vh;
   margin: 25px;
 }
 
-/* Estilo para el área principal del contenido */
 .main-content {
   display: flex;
-  flex: 1; /* Toma el resto del espacio disponible */
+  flex: 1;
 }
 
-/* Estilo para el contenido dinámico */
 .content-area {
   flex: 1;
   padding: 2rem;
-  overflow-y: auto;  /* Desplazamiento si el contenido excede el alto */
+  overflow-y: auto;
 }
 
-/* Media Query para pantallas pequeñas (móviles) */
 @media (max-width: 768px) {
   .wrapper {
       flex-direction: column;
   }
 
   .main-content {
-      flex-direction: column; /* El contenido y el menú se apilarán en dispositivos móviles */
+      flex-direction: column;
   }
 
   app-sidemenu {
       width: 100%;
-      height: auto; /* En móviles el menú será más pequeño */
+      height: auto;
   }
 
   .content-area {
@@ -39,6 +35,6 @@
   }
 
   .header {
-      padding: 1rem; /* Menor padding en móviles */
+      padding: 1rem;
   }
 }

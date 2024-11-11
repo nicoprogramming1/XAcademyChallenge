@@ -8,7 +8,7 @@
     transition: transform 0.3s ease;
     font-family: Arial, sans-serif;
     min-height: 350px;
-    cursor: pointer; /* Hace la card interactiva */
+    cursor: pointer;
 }
 
 .card-player:hover {
@@ -40,7 +40,6 @@
     color: #777;
 }
 
-/* Estilo para los atributos */
 .list-group {
     list-style: none;
     padding: 0;
@@ -59,7 +58,6 @@
     border-top: none;
 }
 
-/* Ajustes para centrar y espaciar los elementos */
 .list-item-content {
     display: flex;
     justify-content: space-around;

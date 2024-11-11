@@ -16,8 +16,7 @@ export class SidemenuComponent implements OnInit {
   constructor(private menuService: MenuService) {}
 
   ngOnInit() {
-    // Carga las rutas filtradas al inicializar el componente
     this.menuItems = this.menuService.getFilteredRoutes();
-    console.log('Menu Items:', this.menuItems); // Para depurar las rutas filtradas
+    console.log('Menu Items:', this.menuItems);
   }
 }

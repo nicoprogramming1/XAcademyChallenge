@@ -13,7 +13,6 @@
           </a>
         </ng-template>
 
-        <!-- Submenú si existe -->
         <ul *ngIf="route.children && route.children.length > 0" class="submenu">
           <li *ngFor="let child of route.children" class="submenu_item">
             <a [routerLink]="child.path" class="submenu_link">

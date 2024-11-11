@@ -6,7 +6,7 @@ import { Role } from '../interfaces/user.interface'; // Si tienes una enum Role 
   providedIn: 'root',
 })
 export class MenuService {
-  // Devuelve las rutas accesibles para el usuario
+  
   public getFilteredRoutes(): Routes {
     const userRole = localStorage.getItem('role'); // Obtiene el rol del usuario (si está en localStorage)
     const routes: Routes = [
@@ -32,11 +32,11 @@ export class MenuService {
       },
     ];
 
-    // Filtra las rutas según el rol del usuario
+    // aca filtra las rutas según el rol del usuario
     return routes
       .map((route) => {
         if (route.children) {
-          // Filtra las rutas hijas dentro de cada ruta padre
+          // filtra las rutas hijas dentro de cada ruta padre
           route.children = route.children.filter((child) => {
             return !child.data?.['role'] || child.data?.['role'] === userRole;
           });
@@ -44,7 +44,6 @@ export class MenuService {
         return route;
       })
       .filter((route) => {
-        // Filtra las rutas principales si no tienen un rol o si el rol coincide
         return !route.data?.['role'] || route.data?.['role'] === userRole;
       });
   }

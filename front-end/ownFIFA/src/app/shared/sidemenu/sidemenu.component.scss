@@ -1,46 +1,40 @@
-/* Barra lateral principal */
-/* Barra lateral principal */
 .sidebar {
-    background-color: #fff; /* Fondo blanco suave */
-    width: 300px; /* Ancho fijo */
-    height: auto; /* No ocupar todo el alto de la pantalla */
+    background-color: #fff;
+    width: 300px;
+    height: auto;
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    max-height: 90vh; /* Ajusta la altura máxima para que no ocupe todo el alto */
-    overflow-y: auto; /* Permite el desplazamiento si los elementos exceden el límite de altura */
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
-
-/* Lista de elementos de la barra lateral */
 .sidebar_list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Mayor separación entre los elementos */
+    gap: 1.5rem;
 }
 
-/* Estilo de cada elemento de la barra lateral */
 .sidebar_element {
     display: flex;
-    flex-direction: row; /* Los elementos serán en línea */
-    justify-content: flex-start; /* Alineación izquierda */
-    align-items: center; /* Alineación vertical centrada */
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     padding: 0.8rem 1.5rem;
     border-bottom: 1px solid #ddd;
     border-radius: 8px;
     background-color: transparent;
-    color: #495057; /* Texto gris oscuro */
+    color: #495057;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    white-space: nowrap;
 }
 
-/* Estilo del enlace dentro del elemento */
 .sidebar_link {
     text-decoration: none;
     color: inherit;
@@ -53,10 +47,9 @@
     justify-content: flex-start;
 }
 
-/* Efecto hover para cada item */
 .sidebar_element:hover {
-    background-color: #007bff; /* Azul más brillante en hover */
-    color: #fff; /* Texto blanco en hover */
+    background-color: #007bff;
+    color: #fff;
 }
 
 .sidebar_icon {
@@ -65,12 +58,10 @@
     transition: transform 0.3s ease;
 }
 
-/* Efecto de hover en el ícono (rotación suave) */
 .sidebar_element:hover .sidebar_icon {
     transform: rotate(90deg);
 }
 
-/* Submenú */
 .submenu {
     list-style: none;
     padding-left: 1.5rem;
@@ -80,36 +71,32 @@
     margin-top: 0.5rem;
 }
 
-/* Elementos dentro del submenú */
 .submenu_item {
     padding: 0.5rem 1rem;
     background-color: transparent;
-    color: #495057; /* Gris oscuro en submenú */
+    color: #495057;
     border-radius: 6px;
     font-size: 0.9rem;
     transition: background-color 0.2s ease;
 }
 
-/* Efecto hover para el submenú */
 .submenu_item:hover {
-    background-color: #e2e6ea; /* Gris claro en hover */
-    color: #007bff; /* Azul para texto en hover */
+    background-color: #e2e6ea;
+    color: #007bff;
 }
 
-/* Textos dentro de los elementos */
 .sidebar_text {
     font-size: 1rem;
     font-weight: 400;
     color: inherit;
-    overflow: hidden; /* Previene desbordamientos de texto */
-    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es demasiado largo */
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* Cuando la barra lateral se muestra como oculta o en dispositivos móviles */
 @media (max-width: 768px) {
     .sidebar {
-        width: 200px; /* Reduce el tamaño en dispositivos pequeños */
+        width: 200px;
     }
 
     .sidebar_element {
