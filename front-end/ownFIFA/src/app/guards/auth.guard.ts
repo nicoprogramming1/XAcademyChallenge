@@ -4,15 +4,16 @@ import { Router } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-
-  // verifica si el token existe en localStorage
   const token = localStorage.getItem('token');
-  
+  console.log('authGuard ejecutado. Token encontrado:', token); // Verificar el token en el guard
+
   if (!token) {
-    router.navigate(['/login']);
+    console.log('No se encontró token. Redirigiendo a login...');
+    router.navigate(['/login']);  // Redirige si no hay token
     return false;
   }
 
-  // Si el token existe permite el acceso
-  return true;
+  console.log('Token válido, acceso permitido.');
+  return true;  // Permite el acceso si hay token
 };
+

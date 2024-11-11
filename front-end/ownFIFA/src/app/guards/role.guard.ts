@@ -4,20 +4,18 @@ import { Router } from '@angular/router';
 
 export const roleGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  
   const role = localStorage.getItem('role');
-  
-  // aca verifica si la ruta requiere rol "Administrador"
   const requiredPath = route.routeConfig?.path;
+  console.log(`roleGuard ejecutado para la ruta: ${requiredPath}. Rol del usuario: ${role}`);  // Verifica el rol y la ruta
 
   if (requiredPath === 'player-registration' || requiredPath === 'users') {
     if (role !== 'Administrador') {
-      // si no es "Administrador" te redirige al dashboard
+      console.log('Rol no permitido. Redirigiendo a dashboard...');
       router.navigate(['/dashboard']);
-      return false;
+      return false;  // Redirige si el rol no es el correcto
     }
   }
 
-  // si todo ok permite acceso
-  return true;
+  console.log('Rol correcto, acceso permitido.');
+  return true;  // Permite el acceso si el rol es válido
 };
