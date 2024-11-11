@@ -52,14 +52,9 @@ export const routes: Routes = [
     canActivate: [roleGuard], // Solo para "Administrador"
   },
   {
-    path: '',
-    redirectTo: 'players',
-    pathMatch: 'full',
-  },
-  {
     path: 'login',
     loadComponent: () =>
-      import('./views/users/login/login/login.component').then(
+      import('./views/login/login/login.component').then(
         (m) => m.LoginComponent
       ),
   },
