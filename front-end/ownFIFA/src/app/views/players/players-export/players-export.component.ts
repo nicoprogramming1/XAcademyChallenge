@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CsvService } from '../../../services/csv.service';
+import { TitleH1Component } from '../../../shared/title-h1/title-h1.component';
 
 @Component({
   selector: 'app-players-export',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TitleH1Component],
   templateUrl: './players-export.component.html',
   styleUrl: './players-export.component.scss'
 })
@@ -13,6 +14,8 @@ export class PlayersExportComponent {
   private csvService = inject(CsvService)
   public errorMessage: string | null = null;
   public successMessage: string | null = null;
+
+  public title: string = "Exportar jugadores"
 
   exportDatabase(event: MouseEvent): void {
     event.preventDefault();  // evitar la recarga del formulario
