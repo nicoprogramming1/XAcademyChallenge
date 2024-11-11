@@ -1,5 +1,5 @@
   .container {
-    max-width: 600px;
+    width: 60%;
   }
 
   .player-card {
@@ -26,11 +26,11 @@
   }
 
   .player-atribute {
-    font-weight: bold;
+    font-weight: 400;
   }
 
   #skillsRadarChart {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding-top: 20px;
   }
@@ -40,14 +40,19 @@
   }
   
   .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 30px;
   }
   
   .card-text {
     color: #333;
+    font-weight: 100;
     margin-bottom: 8px;
+
+  }
+
+  .obligatorios {
+    color: #f00
   }
   
   button {

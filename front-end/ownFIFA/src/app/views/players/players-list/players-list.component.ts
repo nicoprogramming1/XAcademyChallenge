@@ -70,7 +70,7 @@ export class PlayersListComponent {
   exportToCSV() {
     this.playerService.getFilteredPlayersForExport(this.filter).subscribe({
       next: (res) => {
-        console.log('Datos recibidos para exportar:', res); // Diagnóstico
+        console.log('Datos recibidos para exportar:', res);
 
         if (res && res.data.players?.length) {
           const worksheet = XLSX.utils.json_to_sheet(res.data.players);
