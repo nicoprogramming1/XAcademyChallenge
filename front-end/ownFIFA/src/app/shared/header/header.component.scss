@@ -1,30 +1,25 @@
-/* Estilos para el header */
+/* Contenedor para el header */
 .header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* Para separar logo/nombre y botón */
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #fff; /* Fondo blanco, como el de la barra lateral */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    border-radius: 10px;
-    margin: 15px 25px;
-    margin-bottom: 1.5rem; /* Espacio entre el header y el contenido */
-  }
-  
-  .header-left {
-    display: flex;
-    align-items: center; /* Alinea el logo y el nombre */
-    gap: 10px; /* Separación entre el logo y el nombre */
-  }
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Distribuir los elementos a la izquierda y derecha */
+  align-items: center; /* Centrar verticalmente */
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 15px 0 1.5rem 0;  /* Márgenes de 15px arriba y 1.5rem abajo */
+}
 
-  .project-name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #495057; /* Gris oscuro */
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-  }
+/* Estilo para el nombre del proyecto */
+.project-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+/* Estilo para el contenedor del botón de logout */
+.header-right {
+  display: flex;
+  align-items: center;
+}
