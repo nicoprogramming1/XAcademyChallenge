@@ -1,7 +1,8 @@
 /* Barra lateral principal */
+/* Barra lateral principal */
 .sidebar {
     background-color: #fff; /* Fondo blanco suave */
-    width: 275px; /* Ancho fijo */
+    width: 300px; /* Ancho fijo */
     height: auto; /* No ocupar todo el alto de la pantalla */
     padding: 1.5rem;
     border-radius: 10px;
@@ -10,6 +11,7 @@
     max-height: 90vh; /* Ajusta la altura máxima para que no ocupe todo el alto */
     overflow-y: auto; /* Permite el desplazamiento si los elementos exceden el límite de altura */
 }
+
 
 /* Lista de elementos de la barra lateral */
 .sidebar_list {
