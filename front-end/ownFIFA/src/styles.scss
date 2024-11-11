@@ -2,34 +2,38 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 *, ::after, ::before {
-    box-sizing: border-box; margin: 0;
+    box-sizing: border-box;
+    margin: 0;
 }
 
-html, body { height: 100%; }
-body { 
+html, body {
+    height: 100%;  /* Asegura que el body ocupe toda la altura disponible */
+}
+
+body {
     font-family: "montserrat", "Helvetica", "Helvetica Neue", sans-serif;
     font-weight: 400;
-    background-size: cover;
     background-image: linear-gradient(#37b, #eee);
-    display: flex;
-    align-items: center;
- }
+    background-size: cover; /* Esto asegura que el fondo cubra toda la pantalla */
+    background-attachment: fixed; /* Mantiene el fondo fijo mientras haces scroll */
+    background-position: center; /* Centra el fondo */
+}
 
-// defino tipografia regular
+/* Definir tipografía regular */
 @font-face {
     font-family: montserrat;
     src: url("../public/fonts/Montserrat-Regular.ttf") format("truetype");
     font-weight: 400;
 }
 
-// defino tipografia bold
+/* Definir tipografía bold */
 @font-face {
     font-family: montserrat;
     src: url("../public/fonts/Montserrat-ExtraBold.ttf") format("truetype");
     font-weight: 700;
 }
 
-// defino tipografia light
+/* Definir tipografía light */
 @font-face {
     font-family: montserrat;
     src: url("../public/fonts/Montserrat-ExtraLight.ttf") format("truetype");

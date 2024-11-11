@@ -1,39 +1,44 @@
 /* Estilos globales del wrapper */
 .wrapper {
-    display: flex;
-    flex-direction: column; /* El header estará encima */
-    height: 100vh;  /* Ocupa todo el alto de la pantalla */
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  
-  /* Contenedor para el main content */
-  .main-content {
-    display: flex;
-    flex: 1; /* Toma el resto del espacio */
-  }
-  
-  /* Estilo para el contenido */
-  .content-area {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;  /* Desplazamiento si el contenido excede el alto */
-  }
-  
-  /* Media Query para pantallas pequeñas (móviles) */
-  @media (max-width: 768px) {
-    .wrapper {
+  display: flex;
+  flex-direction: column; /* El header estará encima */
+  height: 100vh;  /* Ocupa todo el alto de la pantalla */
+  margin: 25px;
+}
+
+/* Estilo para el área principal del contenido */
+.main-content {
+  display: flex;
+  flex: 1; /* Toma el resto del espacio disponible */
+}
+
+/* Estilo para el contenido dinámico */
+.content-area {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;  /* Desplazamiento si el contenido excede el alto */
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .wrapper {
       flex-direction: column;
-    }
-  
-    app-sidemenu {
+  }
+
+  .main-content {
+      flex-direction: column; /* El contenido y el menú se apilarán en dispositivos móviles */
+  }
+
+  app-sidemenu {
       width: 100%;
       height: auto; /* En móviles el menú será más pequeño */
-    }
-  
-    .content-area {
-      padding: 1rem;
-    }
   }
-  
+
+  .content-area {
+      padding: 1rem;
+  }
+
+  .header {
+      padding: 1rem; /* Menor padding en móviles */
+  }
+}
