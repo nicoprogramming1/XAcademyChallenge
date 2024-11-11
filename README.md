@@ -96,13 +96,16 @@ En este apartado solo se nombran algunas de las decisiones tomadas en el desarro
 - Se crea una carpeta Files tanto para los uploads (importaciones a db) como para las descargas (export)
 - El usuario con rol Invitado solo puede consultar jugador, listarlos, filtrarlos y descargarlos
 - Se decide solo implementar el registro de un usuario y no su modificación, consulta y eliminación
-- Se decide documentar con Swagger
 - El análisis funcional será mínimo ya que no es un requisito y además no tener la tabla players normalizada deja los diagramas UML muy pobres y desconexos (clases de diseño, modelo de base de datos relaciones, modelo del dominio del problema, etc). Además conlleva mucho tiempo!
 - Se decide usar xlsx para gestionar la lista filtrada csv
 - Se decide usar json2csv para gestionar los export csv
 - Se usa sequelize como ORM para procesar operaciones sql y de modelo de datos
 - Se usa express-validator y Reactive Forms para validaciones
-
+- Se implementa Postman para test de endpoints
+- El diseño es responsive
+- Los H1 a modo de títulos son reactivos
+- Si la página es login, oculta el menú y el logout component ofreciendo el inicio de sesión
+- Se utiliza Bootstrap, BoxIcons y CSS vanilla
 
 
 
