@@ -1,7 +1,10 @@
 <div class="wrapper">
-    
-    <main class="content">
-        <router-outlet></router-outlet>
-    </main>
-    
-</div>
+    <app-header></app-header>
+    <div class="main-content">
+      <app-sidemenu></app-sidemenu>
+      <div class="content-area">
+        <router-outlet></router-outlet>  <!-- contenido dinamico -->
+      </div>
+    </div>
+  </div>
+  

@@ -1,17 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidemenu',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './sidemenu.component.html',
-  styleUrl: './sidemenu.component.scss'
+  styleUrls: ['./sidemenu.component.scss'],
 })
-export class SidemenuComponent {
-  private menuService = inject(MenuService)
+export class SidemenuComponent implements OnInit {
+  public menuItems: any[] = [];
 
-  public menuItems = this.menuService.routes
+  constructor(private menuService: MenuService) {}
+
+  ngOnInit() {
+    // Carga las rutas filtradas al inicializar el componente
+    this.menuItems = this.menuService.getFilteredRoutes();
+    console.log('Menu Items:', this.menuItems); // Para depurar las rutas filtradas
+  }
 }

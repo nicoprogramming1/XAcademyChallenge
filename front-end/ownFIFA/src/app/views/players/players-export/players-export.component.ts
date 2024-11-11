@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { CsvService } from '../../../../services/csv.service';
+import { CsvService } from '../../../services/csv.service';
 
 @Component({
   selector: 'app-players-export',

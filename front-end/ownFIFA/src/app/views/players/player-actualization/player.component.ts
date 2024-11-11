@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PlayerService } from '../../../../services/player.service';
-import { PlayerStateService } from '../../../../services/player-state.service';
+import { PlayerService } from '../../../services/player.service';
+import { PlayerStateService } from '../../../services/player-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BodyType, FifaUpdate, FifaVersion, Player, playerFaceUrl, PlayerPositions, PreferredFoot } from '../../../../interfaces/player.interface';
+import { BodyType, FifaUpdate, FifaVersion, Player, playerFaceUrl, PlayerPositions, PreferredFoot } from '../../../interfaces/player.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
-import { LoadingErrorComponent } from "../../../../shared/loading-error/loading-error.component";
-import { TitleH1Component } from "../../../../shared/title-h1/title-h1.component";
+import { LoadingErrorComponent } from "../../../shared/loading-error/loading-error.component";
+import { TitleH1Component } from "../../../shared/title-h1/title-h1.component";
 Chart.register(...registerables);
 
 @Component({

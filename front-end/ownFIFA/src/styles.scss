@@ -1,8 +1,19 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+*, ::after, ::before {
+    box-sizing: border-box; margin: 0;
+}
+
 html, body { height: 100%; }
-body { box-sizing: border-box; margin: 0; font-family: "montserrat", "Helvetica", "Helvetica Neue", sans-serif; font-weight: 400; }
+body { 
+    font-family: "montserrat", "Helvetica", "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    background-size: cover;
+    background-image: linear-gradient(#37b, #eee);
+    display: flex;
+    align-items: center;
+ }
 
 // defino tipografia regular
 @font-face {
