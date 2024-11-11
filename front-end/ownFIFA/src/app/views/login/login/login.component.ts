@@ -63,6 +63,10 @@ export class LoginComponent {
           this.successMessage = null;
         },
       });
+    } else {
+      this.errorMessage =
+        'Error en el inicio de sesión. Por favor, verifica tus credenciales.';
+      this.successMessage = null;
     }
   }
 }
