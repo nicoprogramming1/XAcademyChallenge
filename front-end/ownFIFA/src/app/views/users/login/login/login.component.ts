@@ -48,8 +48,9 @@ export class LoginComponent {
 
       this.userService.login(payload).subscribe({
         next: (res) => {
-          if (res) {
-            localStorage.setItem('token', res.token!); // guarda el token en localStorage
+          if (res && res.token && res.data.role) {
+            localStorage.setItem('token', res.token); // guarda el token
+            localStorage.setItem('role', res.data.role); // guarda el rol del usuario
 
             this.router.navigate(['/dashboard']); // redirige al dashboard
             this.successMessage = 'Inicio de sesión exitoso';

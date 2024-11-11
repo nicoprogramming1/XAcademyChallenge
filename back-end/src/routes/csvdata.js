@@ -3,7 +3,7 @@ const router = express.Router();
 const uploadCSVMdw = require("../middleware/multerMdw");
 const csvDataController = require("../controllers/csvDataController");
 const Roles = require("../models")
-const roleMdw = require("../middleware")
+const roleMdw = require("../middleware/roleMdw")
 
 router.post("/", roleMdw(Roles.ADMIN), uploadCSVMdw.single("csvFile"), csvDataController.uploadCSV);
 router.get("/", csvDataController.downloadCSV);
