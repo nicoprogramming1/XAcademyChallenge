@@ -16,6 +16,11 @@
 }
 
 .checkbox-container {
+    margin-top: 25px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: #fff;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -63,7 +68,7 @@ label {
 }
 
 .alert-success {
-    font-weight: bold;
+    font-weight: 700;
     border-radius: 5px;
 }
 

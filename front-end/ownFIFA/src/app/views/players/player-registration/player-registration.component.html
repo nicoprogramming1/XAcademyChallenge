@@ -23,7 +23,7 @@
             </div>
 
             <div formArrayName="playerPositions" class="mb-3">
-                <h5>Posiciones: *</h5>
+                <span class="positions">Posiciones: *</span>
                 <div class="checkbox-container">
                     @for(position of playerPositions; track position) {
                         <div class="form-check checkbox-item">
@@ -136,7 +136,7 @@
                 <div class="text-danger">{{showShootingErrors()}}</div>
             </div>
 
-            <div class="d-flex justify-content-between mt-4">
+            <div class="d-flex justify-content-start mt-4 gap-3">
                 <button type="submit" class="btn btn-primary btn-lg">Registrar jugador</button>
                 <button type="button" class="btn btn-secondary btn-lg" (click)="resetForm()">Reestablecer</button>
             </div>
