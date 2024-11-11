@@ -1,10 +1,15 @@
+<!-- app.component.html -->
 <div class="wrapper">
-    <app-header></app-header>
-    <div class="main-content">
+  <div class="header">
+    <app-header [loginPage]="loginPage"></app-header>
+  </div>
+  <div class="main-content">
+    @if(!isLoginPage()) {
+
       <app-sidemenu></app-sidemenu>
-      <div class="content-area">
-        <router-outlet></router-outlet>  <!-- contenido dinamico -->
-      </div>
+    }
+    <div class="content-area">
+      <router-outlet></router-outlet> <!-- contenido dinámico -->
     </div>
   </div>
-  
+</div>
