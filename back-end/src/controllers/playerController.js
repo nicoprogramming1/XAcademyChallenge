@@ -8,7 +8,7 @@ exports.getAllPlayers = [
 
   async (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 9;
+    const limit = parseInt(req.query.limit) || 12;
     const club = req.query.club;
     const nationality = req.query.nationality;
     const age = req.query.age ? parseInt(req.query.age) : undefined;
