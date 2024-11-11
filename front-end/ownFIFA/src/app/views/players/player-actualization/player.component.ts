@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PlayerService } from '../../../../services/player.service';
-import { PlayerStateService } from '../../../../services/player-state.service';
+import { PlayerStateService } from '../../../services/player-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BodyType, FifaUpdate, FifaVersion, Player, playerFaceUrl, PlayerPositions, PreferredFoot } from '../../../../interfaces/player.interface';
+import { BodyType, FifaUpdate, FifaVersion, Player, playerFaceUrl, PlayerPositions, PreferredFoot } from '../../../interfaces/player.interface';
 import { Chart, ChartType, registerables } from 'chart.js';
-import { LoadingErrorComponent } from "../../../../shared/loading-error/loading-error.component";
-import { TitleH1Component } from "../../../../shared/title-h1/title-h1.component";
+import { LoadingErrorComponent } from "../../../shared/loading-error/loading-error.component";
+import { TitleH1Component } from "../../../shared/title-h1/title-h1.component";
+import { PlayerService } from '../../../services/player.service';
 Chart.register(...registerables);
 
 @Component({
@@ -38,10 +38,10 @@ export class PlayerComponent {
   public player = this.playerStateService.player; // tiene el player actualizado desde el state
 
   private id!: number | null;
-  public editMode!: boolean;
+  public editMode: boolean = false;
   public editablePlayer: Partial<Player> | null = null; // copia parcial editable de player
   public skillsChart!: Chart;
-  public title!: string
+  public title: string = "Consultar jugador"
 
   public invalidForm: boolean = false;
   public updateForm!: FormGroup;
@@ -54,7 +54,6 @@ export class PlayerComponent {
   public playerFaceUrl = Object.values(playerFaceUrl);
   
   ngOnInit(): void {
-    this.editMode = false;
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (this.id !== null) {
       this.loadPlayer(this.id);
@@ -62,8 +61,6 @@ export class PlayerComponent {
       // necesito una pantalla de error aqui
       console.error('El id del jugador es nulo');
     }
-
-    
   }
 
   loadPlayer(id: number) {
@@ -136,6 +133,7 @@ export class PlayerComponent {
   // cambia entre las vistas de sólo lectua y edición
   toggleEdit(): void {
     this.editMode = !this.editMode;
+    this.title = "Modificar jugador"
     if(this.editMode && this.player()) {
       this.editablePlayer = { ...this.player() }; // copia los datos de la signal
       console.log("Desde el toggleEdit, editablePlayer es: ", this.editablePlayer)
@@ -169,7 +167,7 @@ export class PlayerComponent {
      this.playerService.updatePlayer(this.id!, updatedPlayer).subscribe({
       next: (res) => {
         console.log('Jugador guardado con éxito', res);
-        this.toggleEdit(); // Vuelve a modo solo lectura
+        this.redirect();
       },
       error: (err) => {
         alert('Se ha producido un error en el guardado del jugador!');

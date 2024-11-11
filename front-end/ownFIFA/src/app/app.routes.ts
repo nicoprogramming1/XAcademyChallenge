@@ -1,72 +1,66 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'player-registration',
     loadComponent: () =>
-      import('./views/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
+      import(
+        './views/players/player-registration/player-registration.component'
+      ).then((m) => m.PlayerRegistrationComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'players',
+    loadComponent: () =>
+      import('./views/players/players-list/players-list.component').then(
+        (m) => m.PlayersListComponent
       ),
-    children: [
-      {
-        path: 'player-registration',
-        loadComponent: () =>
-          import(
-            './views/dashboard/players/player-registration/player-registration.component'
-          ).then((m) => m.PlayerRegistrationComponent),
-      },
-      {
-        path: 'players',
-        loadComponent: () =>
-          import('./views/dashboard/players/players-list/players-list.component').then(
-            (m) => m.PlayersListComponent
-          ),
-      },
-      {
-        path: 'players/:id',
-        loadComponent: () =>
-          import('./views/dashboard/players/player-actualization/player.component').then(
-            (m) => m.PlayerComponent
-          ),
-      },
-      {
-        path: 'players-import',
-        loadComponent: () =>
-          import('./views/dashboard/players/players-import/players-import.component').then(
-            (m) => m.PlayersImportComponent
-          ),
-      },
-      {
-        path: 'players-export',
-        loadComponent: () =>
-          import('./views/dashboard/players/players-export/players-export.component').then(
-            (m) => m.PlayersExportComponent
-          ),
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-    ],
+    canActivate: [authGuard],
+  },
+  {
+    path: 'players/:id',
+    loadComponent: () =>
+      import('./views/players/player-actualization/player.component').then(
+        (m) => m.PlayerComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'players-import',
+    loadComponent: () =>
+      import('./views/players/players-import/players-import.component').then(
+        (m) => m.PlayersImportComponent
+      ),
+    canActivate: [authGuard, roleGuard], // Solo para "Administrador"
+  },
+  {
+    path: 'players-export',
+    loadComponent: () =>
+      import('./views/players/players-export/players-export.component').then(
+        (m) => m.PlayersExportComponent
+      ),
+    canActivate: [authGuard],
   },
   {
     path: 'users',
     loadComponent: () =>
-      import('./views/users/user-registration/user-registration.component').then(
-        (m) => m.UserRegistrationComponent
-      ),
+      import(
+        './views/users/user-registration/user-registration.component'
+      ).then((m) => m.UserRegistrationComponent),
+    canActivate: [roleGuard], // Solo para "Administrador"
   },
   {
     path: 'login',
     loadComponent: () =>
-      import('./views/users/login/login/login.component').then(
+      import('./views/login/login/login.component').then(
         (m) => m.LoginComponent
       ),
   },
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'players',
     pathMatch: 'full',
   },
 ];

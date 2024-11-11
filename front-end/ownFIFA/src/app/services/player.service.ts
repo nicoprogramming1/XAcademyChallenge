@@ -73,16 +73,19 @@ export class PlayerService {
     longName?: string;
   }): Observable<PlayersResponse | null> {
     this.playerStateService.loadingState(); // loading: true en el state
-  
+
     const params = this.createFilterParams(filters);
-  
+
     return of(null).pipe(
       delay(1000), // simular demora y ver el spinner de carga
-      switchMap(() => 
-        this.http.get<PlayersResponse>(`${this.apiUrl}/player/filterExport`, { params })
+      switchMap(() =>
+        this.http.get<PlayersResponse>(`${this.apiUrl}/player/filterExport`, {
+          params,
+        })
       ),
       map((res) => {
-        if (res.success && res.data.players?.length) { // Verificamos que los datos existan y tengan al menos un elemento
+        if (res.success && res.data.players?.length) {
+          // Verificamos que los datos existan y tengan al menos un elemento
           console.log('Jugadores filtrados para exportar: ', res.data.players);
           this.playerStateService.loadAllPlayersState(res.data.players); // carga los jugadores en el state para ponerlos a disposicion global
           return res;
@@ -100,7 +103,6 @@ export class PlayerService {
       })
     );
   }
-  
 
   getPlayerById(id: number): Observable<Player | null> {
     this.playerStateService.loadingState();
@@ -189,11 +191,9 @@ export class PlayerService {
     );
   }
 
-  updatePlayer(
-    id: number,
-    playerData: Partial<Player>
-  ): Observable<Player | null> {
+  updatePlayer(id: number, playerData: Partial<Player>): Observable<Player | null> {
     this.playerStateService.loadingState();
+    console.log("desde el update: ", playerData)
     return this.http
       .put<PlayerResponse>(`${this.apiUrl}/player/${id}`, playerData)
       .pipe(

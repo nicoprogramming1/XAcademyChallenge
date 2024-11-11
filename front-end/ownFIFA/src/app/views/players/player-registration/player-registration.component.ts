@@ -16,14 +16,15 @@ import {
   playerFaceUrl,
   PlayerPositions,
   PreferredFoot,
-} from '../../../../interfaces/player.interface';
-import { PlayerService } from '../../../../services/player.service';
-import { PlayerStateService } from '../../../../services/player-state.service';
+} from '../../../interfaces/player.interface';
+import { PlayerService } from '../../../services/player.service';
+import { PlayerStateService } from '../../../services/player-state.service';
+import { TitleH1Component } from "../../../shared/title-h1/title-h1.component";
 
 @Component({
   selector: 'app-player-registration',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TitleH1Component],
   templateUrl: './player-registration.component.html',
   styleUrl: './player-registration.component.scss',
 })
@@ -37,6 +38,7 @@ export class PlayerRegistrationComponent {
   public successMessage = this.playerStateService.successMessage;
 
   public invalidForm: boolean = false;
+  public title: string = "Registrar jugador"
 
   public registerForm!: FormGroup;
   public playerPositions = Object.values(PlayerPositions);

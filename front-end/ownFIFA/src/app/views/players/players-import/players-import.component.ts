@@ -4,7 +4,7 @@ import {
   FormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { CsvService } from '../../../../services/csv.service';
+import { CsvService } from '../../../services/csv.service';
 
 @Component({
   selector: 'app-players-import',

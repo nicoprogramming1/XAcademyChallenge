@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PlayerService } from '../../../../services/player.service';
-import { PlayerStateService } from '../../../../services/player-state.service';
-import { CardPlayerComponent } from '../../../../shared/card-player/card-player.component';
-import { LoadingSpinnerComponent } from '../../../../shared/loading-spinner/loading-spinner.component';
+import { PlayerService } from '../../../services/player.service';
+import { PlayerStateService } from '../../../services/player-state.service';
+import { CardPlayerComponent } from '../../../shared/card-player/card-player.component';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner.component';
 import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
-import { LoadingErrorComponent } from '../../../../shared/loading-error/loading-error.component';
-import { TitleH1Component } from "../../../../shared/title-h1/title-h1.component";
+import { LoadingErrorComponent } from '../../../shared/loading-error/loading-error.component';
+import { TitleH1Component } from "../../../shared/title-h1/title-h1.component";
 
 @Component({
   selector: 'app-players-list',
@@ -70,7 +70,7 @@ export class PlayersListComponent {
   exportToCSV() {
     this.playerService.getFilteredPlayersForExport(this.filter).subscribe({
       next: (res) => {
-        console.log('Datos recibidos para exportar:', res); // Diagnóstico
+        console.log('Datos recibidos para exportar:', res);
 
         if (res && res.data.players?.length) {
           const worksheet = XLSX.utils.json_to_sheet(res.data.players);

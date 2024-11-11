@@ -1,13 +1,27 @@
 <section>
-    <div>
-        <ul>
-            @for (item of menuItems(); track item.title) {
-                <li>
-                    <a [routerLink]="item.path">
-                        <span>{{item.title}}</span>
-                    </a>
-                </li>
-            }
+  <aside class="sidebar">
+    <ul class="sidebar_list">
+      <li *ngFor="let route of menuItems" class="sidebar_element">
+        <a *ngIf="route.children && route.children.length > 0; else showLink" [routerLink]="route.path" class="sidebar_link">
+          <i class="bx bx-chevron-down sidebar_icon"></i>
+          <p class="sidebar_text">{{ route.data?.title }}</p>
+        </a>
+        <ng-template #showLink>
+          <a [routerLink]="route.path" class="sidebar_link">
+            <i class="bx bx-send sidebar_icon"></i>
+            <p class="sidebar_text">{{ route.data?.title }}</p>
+          </a>
+        </ng-template>
+
+        <!-- Submenú si existe -->
+        <ul *ngIf="route.children && route.children.length > 0" class="submenu">
+          <li *ngFor="let child of route.children" class="submenu_item">
+            <a [routerLink]="child.path" class="submenu_link">
+              <p class="sidebar_text">{{ child.data?.title }}</p>
+            </a>
+          </li>
         </ul>
-    </div>
+      </li>
+    </ul>
+  </aside>
 </section>
