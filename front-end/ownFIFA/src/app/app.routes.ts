@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
+import { Role } from './interfaces/user.interface';
 
 export const routes: Routes = [
   {
@@ -7,6 +10,7 @@ export const routes: Routes = [
       import('./views/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent
       ),
+    canActivate: [authGuard], // Protege la ruta y todas sus hijas
     children: [
       {
         path: 'player-registration',
@@ -18,30 +22,32 @@ export const routes: Routes = [
       {
         path: 'players',
         loadComponent: () =>
-          import('./views/dashboard/players/players-list/players-list.component').then(
-            (m) => m.PlayersListComponent
-          ),
+          import(
+            './views/dashboard/players/players-list/players-list.component'
+          ).then((m) => m.PlayersListComponent),
       },
       {
         path: 'players/:id',
         loadComponent: () =>
-          import('./views/dashboard/players/player-actualization/player.component').then(
-            (m) => m.PlayerComponent
-          ),
+          import(
+            './views/dashboard/players/player-actualization/player.component'
+          ).then((m) => m.PlayerComponent),
       },
       {
         path: 'players-import',
         loadComponent: () =>
-          import('./views/dashboard/players/players-import/players-import.component').then(
-            (m) => m.PlayersImportComponent
-          ),
+          import(
+            './views/dashboard/players/players-import/players-import.component'
+          ).then((m) => m.PlayersImportComponent),
+        canActivate: [roleGuard], // aplica el guard para limitar el acceso por rol
+        data: { role: Role.ADMINISTRADOR },
       },
       {
         path: 'players-export',
         loadComponent: () =>
-          import('./views/dashboard/players/players-export/players-export.component').then(
-            (m) => m.PlayersExportComponent
-          ),
+          import(
+            './views/dashboard/players/players-export/players-export.component'
+          ).then((m) => m.PlayersExportComponent),
       },
       {
         path: '',
@@ -53,9 +59,11 @@ export const routes: Routes = [
   {
     path: 'users',
     loadComponent: () =>
-      import('./views/users/user-registration/user-registration.component').then(
-        (m) => m.UserRegistrationComponent
-      ),
+      import(
+        './views/users/user-registration/user-registration.component'
+      ).then((m) => m.UserRegistrationComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: Role.ADMINISTRADOR },
   },
   {
     path: 'login',
