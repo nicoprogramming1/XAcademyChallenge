@@ -1,6 +1,8 @@
 ## XAcademyChallenge
 Author: Wnorowsky Nicolás
 
+ACLARACIÓN DIA 12 MARTES: Hola sé que esta línea que escribo está fuera de término (cerró anoche) solo quería comentar que me olvide aclarar el usuario Invitado al final decidí que pueda registrar, modificar y eliminar un jugador aunque olvidé actualizar este documento con esta información por lo que debajo habrá alguna inconsistencia respecto a esto. Gracias!
+
 ### Instrucciones de despliegue e información relevante
 
 - La branch con el contenido actualizado es "develop-main" (tuve conflictos a resolver en la main y ya es muy tarde perdón)
