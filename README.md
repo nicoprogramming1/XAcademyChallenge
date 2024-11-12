@@ -28,7 +28,7 @@ Se decide abordar el Challenge como un pedido formal de un cliente para el desar
 
 Un reconocido player de e-sports nos solicita una web donde poder gestionar de forma sencilla los jugadores de su base de datos personal.
 Su interés radica particularmente en la posibilidad de visualizar el total de jugadores existentes, encontrar un jugador determinado de una forma sencilla e intuitiva, modificar sus atributos, eliminarlo y poder crear nuevos jugadores customizados e incluso conocer su skill progression a lo largo de los años.
-Para ello, nos provee la base de datos con la que compite en torneos de forma oficial, siendo esta una colección de jugadores de ambos sexos en un período que va desde el 2015 al 2023.
+Para ello, nos provee la base de datos con la que compite en torneos de forma oficial, siendo esta una colección de jugadores de sexo femenino en un período que va desde el 2015 al 2023.
 Nos comunica además que quisiera contar con un login para limitar el acceso y la posibilidad de agregar a sus colegas y conocidos para permitir su ingreso de forma restrictiva a sólo funcionalidades que muestren información no sensible sin posibilidad de alterarla.
 Por último, nos comenta que sería oportuno para él poder compartir la base de datos o importar nuevos datos a la misma para integrarla a su perfil en el juego. Los invitados tendrían solamente la posibilidad de descargar los datos de los jugadores.
 
