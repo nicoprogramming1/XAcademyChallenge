@@ -3,12 +3,13 @@ Author: Wnorowsky Nicolás
 
 ### Instrucciones de despliegue e información relevante
 
+- Video presentación: https://drive.google.com/file/d/1c68mRo61CjTiBQidWz5D3FC04_5uE4jY/view?usp=sharing
 - Se trabajó con las base de datos de mujeres
 - Jira board: https://wnorowsky.atlassian.net/jira/software/projects/OW/boards/3
 - Jira Burndown chart: https://wnorowsky.atlassian.net/jira/software/projects/OW/boards/3/reports/burnup
 - Collección postman: https://drive.google.com/file/d/1IgVmye9odRfi2jhuzfHBxGUDdkiEx9jy/view?usp=sharing
 - Al correr la app por primera vez se crea una tabla users vacía, deberán agregarle un usuario "Administrador" para poder registrar invitados y tener acceso total, esto se refleja en el index.js principal (root) del backend en la línea: await User.sync({ force: true }); // comentar luego de correr la 1ra vez
-- La tabla players no fue alterada de ninguna manera, tan sólo se usan ciertos campos.
+- La tabla players no fue alterada de ninguna manera, tan sólo se usan ciertos campos y no está normalizada.
 
 - Existen dos roles:
    - Administrador: acceso total, no puede ser creado en la app, insertar en base de datos o por cli un usuario, recomendado 
