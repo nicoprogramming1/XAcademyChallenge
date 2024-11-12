@@ -30,7 +30,7 @@ export class UserRegistrationComponent {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      firstName: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -76,12 +76,12 @@ export class UserRegistrationComponent {
 
   showFirstNameErrors() {
     const firstName = this.registerForm.get('firstName');
-
+  
     if (firstName?.touched && !firstName.valid) {
       switch (true) {
-        case firstName.errors!['required']:
+        case firstName.errors?.['required']:
           return 'El nombre es obligatorio';
-        case firstName.errors!['minLength']:
+        case firstName.errors?.['minlength']:
           return 'El nombre debe tener al menos 3 caracteres';
         default:
           return null;
@@ -92,12 +92,12 @@ export class UserRegistrationComponent {
 
   showLastNameErrors() {
     const lastName = this.registerForm.get('lastName');
-
+  
     if (lastName?.touched && !lastName.valid) {
       switch (true) {
-        case lastName.errors!['required']:
-          return 'El apellido es obligatoria';
-        case lastName.errors!['minLength']:
+        case lastName.errors?.['required']:
+          return 'El apellido es obligatorio';
+        case lastName.errors?.['minlength']:
           return 'El apellido debe tener al menos 3 caracteres';
         default:
           return null;

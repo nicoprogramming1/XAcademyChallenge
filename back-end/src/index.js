@@ -52,7 +52,7 @@ app.listen(app.get("port"), async () => {
     console.log("Conexión a la base de datos establecida exitosamente desde app.listen");
 
     // Esto sincroniza el modelo User con la base de datos para crear la tabla users
-    // await User.sync({ force: true });
+    // await User.sync({ force: true }); // comentar luego de correr la 1ra vez
 
     console.log("Sincronización con la base de datos completada.");
   } catch (error) {
