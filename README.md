@@ -1,6 +1,20 @@
 ## XAcademyChallenge
 Author: Wnorowsky Nicolás
 
+### Instrucciones de despliegue e información relevante
+
+- Se trabajó con las base de datos de mujeres
+- Jira board: https://wnorowsky.atlassian.net/jira/software/projects/OW/boards/3
+- Jira Burndown chart: https://wnorowsky.atlassian.net/jira/software/projects/OW/boards/3/reports/burnup
+- Collección postman: https://drive.google.com/file/d/1IgVmye9odRfi2jhuzfHBxGUDdkiEx9jy/view?usp=sharing
+- Al correr la app por primera vez se crea una tabla users vacía, deberán agregarle un usuario "Administrador" para poder registrar invitados y tener acceso total, esto se refleja en el index.js principal (root) del backend en la línea: await User.sync({ force: true }); // comentar luego de correr la 1ra vez
+- La tabla players no fue alterada de ninguna manera, tan sólo se usan ciertos campos.
+
+- Existen dos roles:
+   - Administrador: acceso total, no puede ser creado en la app, insertar en base de datos o por cli un usuario, recomendado 
+   - Invitado: acceso limitado, este usuario es el que se crea en el Registro de usuario de la web
+
+
 # INTRODUCCIÓN
 
 Este proyecto es parte del Challenge del XAcademy de Santex Group con motivo de evaluar lo aprendido en el BootCamp a lo largo de los últimos meses. Aprobar remite a participar de la fase de proyectos de la academia en una instancia de simulación laboral en pos de desarrollar software para un cliente ficticio y servir como experiencia a sus participantes.
@@ -106,6 +120,8 @@ En este apartado solo se nombran algunas de las decisiones tomadas en el desarro
 - Los H1 a modo de títulos son reactivos
 - Si la página es login, oculta el menú y el logout component ofreciendo el inicio de sesión
 - Se utiliza Bootstrap, BoxIcons y CSS vanilla
+- Se implementa en el front un authInterceptor para autenticar usuarios
+- Se implementa un menuService para gestionar las rutas para el aside menu
 
 
 
