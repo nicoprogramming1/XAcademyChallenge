@@ -3,6 +3,7 @@ Author: Wnorowsky Nicolás
 
 ### Instrucciones de despliegue e información relevante
 
+- La branch con el contenido actualizado es "develop-main" (tuve conflictos a resolver en la main y ya es muy tarde perdón)
 - Video presentación: https://drive.google.com/file/d/1c68mRo61CjTiBQidWz5D3FC04_5uE4jY/view?usp=sharing
 - Se trabajó con las base de datos de mujeres
 - Jira board: https://wnorowsky.atlassian.net/jira/software/projects/OW/boards/3
